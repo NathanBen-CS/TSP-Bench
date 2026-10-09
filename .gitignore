@@ -1,0 +1,10 @@
+# build output
+*.o
+*.exe
+*.tour
+
+# decompressed TSPLIB files (the .gz originals stay tracked)
+big/*.tsp
+
+# Python
+__pycache__/

@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-09",
+  "cpu": "13th Gen Intel(R) Core(TM) i9-13900H",
+  "logical_cpus": 20,
+  "ram_gb": 31.6,
+  "os": "Windows-11-10.0.26200-SP0",
+  "compiler": "gcc.EXE (Rev2, Built by MSYS2 project) 14.2.0",
+  "cflags_codes": "-O",
+  "cflags_solvers": "-O2",
+  "pinning": "runner sets affinity mask to CPU 0; children inherit it",
+  "time_measure": "GetProcessTimes user time of the whole process",
+  "memory_measure": "GetProcessMemoryInfo PeakWorkingSetSize"
+}

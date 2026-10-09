@@ -1,0 +1,27 @@
+{
+  "instance_dir": "C:/Users/Natha/tsp-instances",
+  "bounds_file": "refs/bounds",
+  "length_exe": "codes/length.exe",
+  "results_csv": "results/runs.csv",
+
+  "instances": "all",
+
+  "algorithms": [
+    {
+      "name": "greedy",
+      "exe": "codes/greedy.exe",
+      "randomized": false,
+      "seeds": [],
+      "max_n": 10000000,
+      "timeout_s": 3600
+    },
+    {
+      "name": "nn",
+      "exe": "solvers/nn.exe",
+      "randomized": false,
+      "seeds": [],
+      "max_n": 320000,
+      "timeout_s": 3600
+    }
+  ]
+}
