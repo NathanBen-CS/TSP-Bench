@@ -19,8 +19,8 @@ import datetime
 import os
 import tempfile
 
-from common import (list_instances, load_config, parse_extras, parse_tour_length,
-                    pin_to_core0, resolve, run_measured)
+from common import (instance_is_geometric, list_instances, load_config, parse_extras,
+                    parse_tour_length, pin_to_core0, resolve, run_measured)
 
 COLUMNS = ["algorithm", "instance", "n", "seed", "tour_length", "user_s", "kernel_s",
            "wall_s", "peak_mb", "status", "extras", "timestamp"]
@@ -104,7 +104,8 @@ def main():
                 if (alg["name"], name, seed) in done:
                     continue
                 label = f"{alg['name']:10} {name:12} n={n:<9}" + (f" seed={seed}" if seed else "")
-                if n > alg.get("max_n", float("inf")):
+                if n > alg.get("max_n", float("inf")) or (
+                        alg.get("geometric_only") and not instance_is_geometric(path)):
                     row = {"status": "SKIPPED"}
                 else:
                     print(label, "...", end=" ", flush=True)

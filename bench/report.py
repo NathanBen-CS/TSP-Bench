@@ -92,14 +92,16 @@ def main():
               "the DIMACS samples byte for byte apart from line endings.",
               ""]
 
-    out = ROOT / "results" / "report.md"
+    out_dir = resolve(cfg["results_csv"]).parent      # report sits next to runs.csv
+    out = out_dir / "report.md"
     out.write_text("\n".join(lines))
     keys = list(dict.fromkeys(k for r in full_rows for k in r))
-    with open(ROOT / "results" / "report_full.csv", "w", newline="") as f:
+    full = out_dir / "report_full.csv"
+    with open(full, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=keys)
         w.writeheader()
         w.writerows(full_rows)
-    print(f"Wrote {out} and results/report_full.csv ({len(runs)} runs)")
+    print(f"Wrote {out} and {full} ({len(runs)} runs)")
 
 
 if __name__ == "__main__":

@@ -120,6 +120,17 @@ def instance_name(path):
     return name[:-4] if name.endswith(".tsp") else name
 
 
+def instance_is_geometric(path):
+    """True if the instance has coordinates (EUC_2D / CEIL_2D), not a matrix."""
+    with open(path, "rb") as f:
+        for _ in range(50):
+            line = f.readline().decode("ascii", "replace")
+            m = re.match(r"\s*EDGE_WEIGHT_TYPE\s*:?\s*(\S+)", line)
+            if m:
+                return m.group(1) in ("EUC_2D", "CEIL_2D")
+    return False
+
+
 def instance_n(path):
     """Read DIMENSION from a TSPLIB header without loading the whole file."""
     with open(path, "rb") as f:
