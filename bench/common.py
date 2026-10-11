@@ -79,19 +79,39 @@ def _process_stats(handle):
     return _filetime_seconds(user), _filetime_seconds(kernel), mem.PeakWorkingSetSize / 2**20
 
 
-def run_measured(cmd, timeout=None):
-    """Run cmd; return user/kernel/wall seconds, peak MB, exit code, output."""
+def run_measured(cmd, timeout=None, heartbeat=None, every=1.0):
+    """Run cmd; return user/kernel/wall seconds, peak MB, exit code, output.
+
+    heartbeat(elapsed_seconds) is called about every `every` seconds while the
+    program runs, so callers can show progress.  Ctrl+C kills the program
+    before re-raising, so no solver is left running in the background."""
     env = dict(os.environ, OMP_NUM_THREADS="1")
     start = time.perf_counter()
     proc = subprocess.Popen([str(c) for c in cmd], stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE, text=True, env=env)
     timed_out = False
     try:
-        out, err = proc.communicate(timeout=timeout)
-    except subprocess.TimeoutExpired:
+        while True:
+            elapsed = time.perf_counter() - start
+            wait = every if heartbeat else None              # how long to block
+            if timeout is not None:
+                left = timeout - elapsed
+                if left <= 0:                                # out of time: stop it
+                    proc.kill()
+                    out, err = proc.communicate()
+                    timed_out = True
+                    break
+                wait = left if wait is None else min(wait, left)
+            try:
+                out, err = proc.communicate(timeout=wait)   # finished: done
+                break
+            except subprocess.TimeoutExpired:               # still running:
+                if heartbeat:                               #   report, keep waiting
+                    heartbeat(time.perf_counter() - start)
+    except KeyboardInterrupt:
         proc.kill()
-        out, err = proc.communicate()
-        timed_out = True
+        proc.communicate()
+        raise
     wall = time.perf_counter() - start
     # proc._handle stays open until the Popen object is destroyed
     user, kernel, peak_mb = _process_stats(int(proc._handle))
