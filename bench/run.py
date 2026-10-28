@@ -2,9 +2,11 @@
 results CSV (one row per seed for randomized algorithms, never averaged).
 
 For each run:
-  1. launch the solver pinned to CPU 0:  solver <instance> <tour_file> [seed]
+  1. launch the solver pinned to CPU 0:
+         solver <instance> <tour_file> [seed] [args from the config entry]
   2. record user CPU time and peak memory of the whole program
-  3. check the tour with codes/length.exe and record its length
+  3. check the tour with codes/length.exe and record its length; if the
+     solver printed tour_cost= and it differs, the status is MISMATCH
   4. append the row, delete the tour file
 
 What you see while it runs:
@@ -90,11 +92,13 @@ def run_one(alg, inst_path, seed, length_exe, heartbeat):
         cmd = [resolve(alg["exe"]), inst_path, tour]
         if seed != "":
             cmd.append(seed)
+        cmd += [str(a) for a in alg.get("args", [])]     # per-variant options
         r = run_measured(cmd, timeout=alg.get("timeout_s"), heartbeat=heartbeat)
+        extras = parse_extras(r["stdout"])
         row = {"user_s": f"{r['user_s']:.3f}", "kernel_s": f"{r['kernel_s']:.3f}",
                "wall_s": f"{r['wall_s']:.3f}", "peak_mb": f"{r['peak_mb']:.1f}",
                "tour_length": "",
-               "extras": ";".join(f"{k}={v}" for k, v in parse_extras(r["stdout"]).items())}
+               "extras": ";".join(f"{k}={v}" for k, v in extras.items())}
         problem = ""
         if r["timed_out"]:
             row["status"] = "DNF"
@@ -107,6 +111,11 @@ def run_one(alg, inst_path, seed, length_exe, heartbeat):
             length = parse_tour_length(check["stdout"])
             if check["exit_code"] == 0 and length is not None:
                 row["status"], row["tour_length"] = "OK", length
+                claimed = extras.get("tour_cost")        # the solver's own length
+                if claimed is not None and round(float(claimed)) != length:
+                    row["status"] = "MISMATCH"           # valid tour, wrong claim
+                    problem = (f"solver reported tour_cost={claimed}, "
+                               f"length.exe measured {length}")
             else:
                 row["status"] = "INVALID"
                 problem = "length.exe: " + (check["stderr"] or check["stdout"]).strip()[-300:]
@@ -139,9 +148,12 @@ def main():
 
     csv_path = resolve(cfg["results_csv"])
     log_path = csv_path.parent / "run.log"
+    csv_path.parent.mkdir(parents=True, exist_ok=True)   # results folder may be new
     length_exe = resolve(cfg["length_exe"])
     bounds = load_bounds(resolve(cfg["bounds_file"]))
     done = load_done(csv_path)
+
+    W = max(10, max(len(a["name"]) for a in algs))     # name column width
 
     # ---- 1. plan: sort every (algorithm, instance, seed) into done/skip/todo
     todo, skips = [], []
@@ -164,12 +176,12 @@ def main():
                     todo.append((alg, name, path, n, seed))
                     n_new += 1
         skipped = ", ".join(f"{c} skipped: {w}" for w, c in reasons.items())
-        print(f"  {alg['name']:10} {n_new:4} to run   {n_done:4} already done"
+        print(f"  {alg['name']:{W}} {n_new:4} to run   {n_done:4} already done"
               + (f"   {skipped}" if skipped else ""))
 
     if args.list:
         for alg, name, path, n, seed in todo:
-            print(f"  would run: {alg['name']:10} {name:12} n={n}"
+            print(f"  would run: {alg['name']:{W}} {name:12} n={n}"
                   + (f" seed={seed}" if seed else ""))
         return
 
@@ -193,7 +205,7 @@ def main():
         log.write(f"\n=== {started:%Y-%m-%d %H:%M:%S} start: {len(todo)} run(s)\n")
         try:
             for k, (alg, name, path, n, seed) in enumerate(todo, 1):
-                label = (f"[{k}/{len(todo)}] {alg['name']:10} {name:12} n={n:<9}"
+                label = (f"[{k}/{len(todo)}] {alg['name']:{W}} {name:12} n={n:<9}"
                          + (f" seed={seed}" if seed else ""))
 
                 minutes_shown = [0]

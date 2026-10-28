@@ -222,20 +222,15 @@ static int orOptMove (int s1) {
 
 /* ------------------------------------------------------------ driver */
 
-void localSearch (int useOrOpt, long long *twoOptMoves, long long *orOptMoves) {
+/* One round: queue every city (in tour order) and work until the queue is
+   empty.  Adds the moves made to the two counters. */
+
+static void runQueue (int useOrOpt, long long *twoOptMoves, long long *orOptMoves) {
 
   int i, c;
 
-  *twoOptMoves = 0;
-  *orOptMoves = 0;
-  if (ncities < 8) return;               /* tiny tours: moves would overlap */
-
-  queue  = (int *) malloc (ncities * sizeof(int));
-  queued = (int *) calloc (ncities + 1, sizeof(int));
-  if (queue == 0 || queued == 0) fatal ("Out of memory in localSearch");
   qHead = 0;
   qCount = 0;
-
   for (i = 0; i < ncities; ++i) push (tour[i]);   /* start: every city queued */
 
   while (qCount > 0) {                   /* until no city has work left:     */
@@ -251,7 +246,55 @@ void localSearch (int useOrOpt, long long *twoOptMoves, long long *orOptMoves) {
     /* no move found: c stays out of the queue until a neighbour's
        move changes its edges and pushes it back in */
   }
+}
 
+static void allocQueue (void) {
+  queue  = (int *) malloc (ncities * sizeof(int));
+  queued = (int *) calloc (ncities + 1, sizeof(int));
+  if (queue == 0 || queued == 0) fatal ("Out of memory in localSearch");
+}
+
+static void freeQueue (void) {
   free (queue);
   free (queued);
+}
+
+/* ------------------------------------------------------------ drivers */
+
+/* One round of the work queue (used by twoopt / twoopt_or). */
+
+void localSearch (int useOrOpt, long long *twoOptMoves, long long *orOptMoves) {
+
+  *twoOptMoves = 0;
+  *orOptMoves = 0;
+  if (ncities < 8) return;               /* tiny tours: moves would overlap */
+
+  allocQueue();
+  runQueue (useOrOpt, twoOptMoves, orOptMoves);
+  freeQueue();
+}
+
+/* Repeat rounds until a whole round, with every city re-examined, makes no
+   move.  That closes the work queue's blind spot (a city whose neighbour's
+   edges changed but whose own edges did not is never re-queued), so the
+   result is a true local optimum for the moves allowed by the neighbour
+   lists and MAX_REVERSAL.  Used by the box solver and its baselines. */
+
+void localSearchToOptimum (int useOrOpt, long long *twoOptMoves,
+                           long long *orOptMoves, int *rounds) {
+
+  long long before;
+
+  *twoOptMoves = 0;
+  *orOptMoves = 0;
+  *rounds = 0;
+  if (ncities < 8) return;
+
+  allocQueue();
+  do {
+    before = *twoOptMoves + *orOptMoves;       /* moves so far             */
+    runQueue (useOrOpt, twoOptMoves, orOptMoves);
+    (*rounds)++;
+  } while (*twoOptMoves + *orOptMoves > before); /* again if this round moved */
+  freeQueue();
 }

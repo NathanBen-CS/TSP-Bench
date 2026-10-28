@@ -84,3 +84,38 @@ linear scan for matrix instances. Deterministic. Included unchanged as a baselin
   applied as 1–3 2-opt exchanges.
 - **Starting tour, data structures, speed tricks, parameters:** as `twoopt`.
 - **Extra output:** as `twoopt`, plus `moves_oropt`.
+
+## boxtsp: box start tour + cleanup (`solvers/boxtsp.c`, `boxes.c`)
+
+A Karp-style partitioning heuristic (Karp 1977), with no worst-case guarantee. One
+program provides all variants of the box experiment, so they run identical code.
+
+- **Idea:** sort the cities along a Hilbert curve on a 2²⁰ × 2²⁰ grid. Cut the
+  sorted list into quadtree boxes of at most *t* cities (each box is a contiguous
+  run of the sorted list). Solve each box exactly with Held-Karp dynamic
+  programming. Glue the box loops together in curve order: each loop is opened at
+  the edge that minimises (edge in − loop edge cut + look-ahead to the next box).
+  Then clean up.
+- **Cleanup:** `2opt` runs 2-opt rounds until a whole round with every city
+  re-examined makes no move. `oropt` does that, then rounds of 2-opt + Or-opt
+  until neither improves. Both use the same neighbour lists, gain criterion and
+  reversal cap as `twoopt_or`.
+- **Data structures:** sorted city list plus box start positions (no explicit
+  tree); DP table of 2^(t−1) × (t−1); the bench tour array and neighbour lists.
+- **Complexity:** sort O(N log N); boxes O(N · depth); DP O(N · 2^t · t); glue
+  O(N · t).
+- **Depth cap:** a box still over *t* cities at depth 20 (only possible when many
+  cities share a grid cell: duplicates) keeps its curve order instead of being
+  solved exactly.
+- **Parameters:** `--t` (default 10, max 12), `--k` neighbours (default 16, the
+  bench's value), `--start boxes|greedy|hilbert|curve`, `--cleanup none|2opt|oropt`,
+  `--curve hilbert|moore|sierpinski|knopp|peano|morton|strip` (`curves.c`) and
+  `--merge M1..M5` (`merges.c`; M1 = the original snake glue). The defaults
+  (Hilbert, M1) give exactly the original tours. Deterministic. Comparison of
+  the curves and merges: `docs/box_tsp_2d.md`.
+- **Speed tricks skipped:** as `twoopt`. The DP table is not reused across boxes of
+  different sizes. No random shift of the quadtree.
+- **Extra output:** per-stage times (`sort_time`, `split_time`, `dp_time`,
+  `glue_time`, `neighbor_time`, `twoopt_time`, `oropt_time`), `boxes`,
+  `capped_boxes`, `largest_box`, `loops_sum`, `glue_G`, `glue_share`,
+  `start_length`, `after_2opt_length`, move and round counts.

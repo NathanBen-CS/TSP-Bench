@@ -8,4 +8,10 @@
 
 void localSearch (int useOrOpt, long long *twoOptMoves, long long *orOptMoves);
 
+/* Same moves, but repeated (every city re-queued) until a whole round makes
+   no move, so no allowed improving move is left.  rounds = rounds run. */
+
+void localSearchToOptimum (int useOrOpt, long long *twoOptMoves,
+                           long long *orOptMoves, int *rounds);
+
 #endif

@@ -1,0 +1,930 @@
+{
+  "instance_dir": "C:/Users/Natha/tsp-instances-box",
+  "bounds_file": "refs/bounds",
+  "length_exe": "codes/length.exe",
+  "results_csv": "results/box2/runs.csv",
+  "instances": [
+    "E10k.0",
+    "E10k.1",
+    "E10k.2",
+    "C10k.0",
+    "C10k.1",
+    "C10k.2"
+  ],
+  "algorithms": [
+    {
+      "name": "box:hilbert:M1:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:hilbert:M2:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:hilbert:M3:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:hilbert:M4:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:hilbert:M5:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M1:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M2:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M3:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M4:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M5:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M1:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M2:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M3:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M4:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M5:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M1:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M2:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M3:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M4:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M5:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M1:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M2:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M3:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M4:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M5:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M1:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M2:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M3:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M4:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M5:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M1:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M2:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M3:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M4:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M5:t10",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "greedy",
+      "exe": "codes/greedy.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600
+    },
+    {
+      "name": "nn",
+      "exe": "solvers/nn.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 320000,
+      "timeout_s": 3600
+    },
+    {
+      "name": "spacefill",
+      "exe": "solvers/spacefill.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600
+    },
+    {
+      "name": "twoopt",
+      "exe": "solvers/twoopt.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600
+    },
+    {
+      "name": "twoopt_or",
+      "exe": "solvers/twoopt_or.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600
+    },
+    {
+      "name": "greedy+2opt+oropt",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "greedy",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "curve:hilbert",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "curve",
+        "--curve",
+        "hilbert",
+        "--cleanup",
+        "none"
+      ]
+    },
+    {
+      "name": "curve:moore",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "curve",
+        "--curve",
+        "moore",
+        "--cleanup",
+        "none"
+      ]
+    },
+    {
+      "name": "curve:sierpinski",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "curve",
+        "--curve",
+        "sierpinski",
+        "--cleanup",
+        "none"
+      ]
+    },
+    {
+      "name": "curve:knopp",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "curve",
+        "--curve",
+        "knopp",
+        "--cleanup",
+        "none"
+      ]
+    },
+    {
+      "name": "curve:peano",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "curve",
+        "--curve",
+        "peano",
+        "--cleanup",
+        "none"
+      ]
+    },
+    {
+      "name": "curve:morton",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "curve",
+        "--curve",
+        "morton",
+        "--cleanup",
+        "none"
+      ]
+    },
+    {
+      "name": "curve:strip",
+      "exe": "solvers/boxtsp.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "curve",
+        "--curve",
+        "strip",
+        "--cleanup",
+        "none"
+      ]
+    }
+  ]
+}

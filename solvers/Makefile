@@ -14,14 +14,19 @@ CC = gcc
 CFLAGS = -O2
 DIMACS = ../codes
 
-LS_SOLVERS = spacefill twoopt twoopt_or
+LS_SOLVERS = spacefill twoopt twoopt_or boxtsp
 SOLVERS = nn $(LS_SOLVERS)
 
-LIBOBJS = tour.o neighbors.o hilbert.o greedystart.o localsearch.o
-HEADERS = tour.h neighbors.h hilbert.h greedystart.h localsearch.h \
-	$(DIMACS)/Instance.h $(DIMACS)/Utilities.h
+LIBOBJS = tour.o neighbors.o hilbert.o greedystart.o localsearch.o boxes.o \
+	curves.o merges.o
+HEADERS = tour.h neighbors.h hilbert.h greedystart.h localsearch.h boxes.h \
+	curves.h merges.h $(DIMACS)/Instance.h $(DIMACS)/Utilities.h
 
-all:	$(SOLVERS)
+all:	$(SOLVERS) boxtest
+
+# tests for the box solver's pieces: run ./boxtest (exit code 0 = all pass)
+boxtest: boxtest.o $(LIBOBJS) Instance.o Utilities.o
+	$(CC) $(CFLAGS) $^ -lm -o $@
 
 Instance.o: $(DIMACS)/Instance.c $(DIMACS)/Instance.h $(DIMACS)/Utilities.h
 	$(CC) $(CFLAGS) -I$(DIMACS) -c $(DIMACS)/Instance.c -o Instance.o
@@ -39,4 +44,4 @@ $(LS_SOLVERS): %: %.o $(LIBOBJS) Instance.o Utilities.o
 	$(CC) $(CFLAGS) $^ -lm -o $@
 
 clean:
-	rm -f *.o *.exe $(SOLVERS) *~
+	rm -f *.o *.exe $(SOLVERS) boxtest *~

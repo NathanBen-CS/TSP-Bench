@@ -40,7 +40,7 @@ typedef struct {
    rotated/flipped so the next, smaller level sees its quadrant the right way
    up. */
 
-static unsigned long long hilbertIndex (unsigned x, unsigned y, unsigned n) {
+unsigned long long hilbertIndex (unsigned x, unsigned y, unsigned n) {
 
   unsigned long long d = 0;
   unsigned s, rx, ry, t;
@@ -73,10 +73,15 @@ static int byKey (const void *a, const void *b) {     /* qsort comparator */
 
 /*******************************************************************/
 
-void hilbertTour (void) {
+/* Sort all cities along the Hilbert curve on a 2^order x 2^order grid.
+   cities[i] = the i-th city along the curve; keys[i] = its curve position
+   (keys may be NULL if not needed).  Used by hilbertTour (order 16) and by
+   the box solver (order 20, see boxes.c). */
+
+void hilbertSort (int order, int *cities, unsigned long long *keys) {
 
   double minx, maxx, miny, maxy, side, scale;
-  unsigned n = 1u << ORDER, gx, gy;
+  unsigned n = 1u << order, gx, gy;
   CurvePoint *pts;
   int c, i;
 
@@ -98,7 +103,7 @@ void hilbertTour (void) {
 
   /* 3. each city's grid cell -> its position along the curve */
   pts = (CurvePoint *) malloc (ncities * sizeof(CurvePoint));
-  if (pts == 0) fatal ("Out of memory in hilbertTour");
+  if (pts == 0) fatal ("Out of memory in hilbertSort");
   for (c=1; c<=ncities; ++c) {
     gx = (unsigned) ((xx[c] - minx) * scale);
     gy = (unsigned) ((yy[c] - miny) * scale);
@@ -106,10 +111,20 @@ void hilbertTour (void) {
     pts[c-1].city = c;
   }
 
-  /* 4. sort by curve position: that order is the tour */
+  /* 4. sort by curve position */
   qsort (pts, ncities, sizeof(CurvePoint), byKey);
-  for (i=0; i<ncities; ++i) tour[i] = pts[i].city;
-  tourSetPositions();
+  for (i=0; i<ncities; ++i) {
+    cities[i] = pts[i].city;
+    if (keys) keys[i] = pts[i].key;
+  }
 
   free (pts);
+}
+
+/*******************************************************************/
+
+void hilbertTour (void) {
+
+  hilbertSort (ORDER, tour, 0);          /* the curve order is the tour */
+  tourSetPositions();
 }
