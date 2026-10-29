@@ -16,17 +16,18 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from common import ROOT
+from common import CODE_KEY, ROOT, config_label
 
-SOLVERS = [                                    # (name in the CSV, label, colour, line style)
-    ("spacefill",         "spacefill",           "#e87ba4", "-"),
-    ("boxes-only",        "box alone (t=10)",    "#4a3aa7", "--"),   # same method as
-    ("nn",                "nn",                  "#eda100", "-"),    # box+2opt+oropt,
-    ("greedy",            "greedy",              "#eb6834", "-"),    # before cleanup
-    ("boxes+2opt+oropt",  "box+2opt+oropt (t=10)", "#4a3aa7", "-"),
-    ("twoopt",            "twoopt",              "#1baf7a", "-"),
-    ("twoopt_or",         "twoopt_or",           "#2a78d6", "-"),
+SOLVERS = [                          # (name in the CSV, colour, line style); labels
+    ("spacefill",         "#e87ba4", "-"),   # come from config_label (common.py)
+    ("boxes-only",        "#4a3aa7", "--"),  # same method as the BTO line,
+    ("nn",                "#eda100", "-"),   #   before cleanup
+    ("greedy",            "#eb6834", "-"),
+    ("boxes+2opt+oropt",  "#4a3aa7", "-"),
+    ("twoopt",            "#1baf7a", "-"),
+    ("twoopt_or",         "#2a78d6", "-"),
 ]
+SOLVERS = [(k, config_label(k), c, s) for k, c, s in SOLVERS]
 SURFACE, TEXT, MUTED, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e6e5e0"
 AREA = 1e12
 TIMER_FLOOR = 0.01            # Windows CPU time comes in ~0.016 s ticks
@@ -46,7 +47,7 @@ def main():
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10,
                          "axes.edgecolor": MUTED, "axes.labelcolor": MUTED,
                          "xtick.color": MUTED, "ytick.color": MUTED})
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15.5, 5.8), facecolor=SURFACE)
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16.5, 6.2), facecolor=SURFACE)
 
     for ax in (ax1, ax2):
         ax.set_facecolor(SURFACE)
@@ -98,14 +99,14 @@ def main():
     ax2.set_title("Running time", loc="left", color=TEXT, fontsize=12, fontweight="bold")
     label_ends(ax2, ends2, lambda v: f"{v:.2f} s" if v < 1 else f"{v:.1f} s", log=True)
 
-    ax1.legend(loc="upper left", bbox_to_anchor=(0, -0.13), ncol=7, frameon=False,
+    ax1.legend(loc="upper left", bbox_to_anchor=(0, -0.13), ncol=4, frameon=False,
                fontsize=9.5, labelcolor=TEXT)
     fig.suptitle("TSP solvers on uniform random instances", x=0.06, ha="left",
                  color=TEXT, fontsize=14, fontweight="bold", y=0.985)
-    fig.text(0.06, 0.915, "Mean over seeds (10 at 1k, 3 at 10k–1M). nn is not run above "
-             "320k cities. Runs faster than the 0.016 s timer tick sit on the floor.",
-             color=MUTED, fontsize=9.5)
-    fig.subplots_adjust(left=0.055, right=0.835, top=0.84, bottom=0.2, wspace=0.72)
+    fig.text(0.06, 0.895, "Mean over seeds (10 at 1k, 3 at 10k–1M). nn is not run above "
+             "320k cities. Runs faster than the 0.016 s timer tick sit on the floor.\n"
+             + CODE_KEY + ".", color=MUTED, fontsize=9.5)
+    fig.subplots_adjust(left=0.055, right=0.82, top=0.82, bottom=0.24, wspace=0.9)
 
     out = ROOT / "results" / "solver_performance.png"
     fig.savefig(out, dpi=170, facecolor=SURFACE)

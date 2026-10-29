@@ -16,17 +16,13 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from common import ROOT, load_bounds
+from common import CODE_KEY, ROOT, config_label, load_bounds
 
-SOLVERS = [                                   # best first, as in solver_performance.png
-    ("twoopt_or", "twoopt_or"),
-    ("twoopt", "twoopt"),
-    ("boxes+2opt+oropt", "box+2opt+oropt\n(t = 10)"),
-    ("greedy", "greedy"),
-    ("nn", "nn"),
-    ("boxes-only", "box alone\n(t = 10)"),   # box tour with no cleanup
-    ("spacefill", "spacefill"),
+SOLVERS = [                                   # best first, as in solver_performance.png;
+    "twoopt_or", "twoopt", "boxes+2opt+oropt",  # labels from config_label (common.py)
+    "greedy", "nn", "boxes-only", "spacefill",
 ]
+SOLVERS = [(k, config_label(k)) for k in SOLVERS]
 SIZES = [("1k", 1000), ("10k", 10000), ("100k", 100000)]
 UNIFORM, CLUSTERED = "#2a78d6", "#eb6834"
 SURFACE, TEXT, MUTED, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e6e5e0"
@@ -88,14 +84,14 @@ def main():
     handles = [plt.Line2D([], [], marker="o", ls="", ms=8, color=UNIFORM, label="uniform"),
                plt.Line2D([], [], marker="o", ls="", ms=8, color=CLUSTERED, label="clustered"),
                plt.Line2D([], [], ls="", label="label = clustered minus uniform, in percentage points")]
-    fig.legend(handles=handles, loc="lower left", bbox_to_anchor=(0.11, 0.0), ncol=3,
+    fig.legend(handles=handles, loc="lower left", bbox_to_anchor=(0.15, 0.0), ncol=3,
                frameon=False, fontsize=10, labelcolor=TEXT)
     fig.suptitle("Clustered vs uniform: how much each solver loses on clumpy data",
-                 x=0.11, ha="left", color=TEXT, fontsize=14, fontweight="bold", y=0.985)
-    fig.text(0.11, 0.905, "Mean % above the Held-Karp lower bound, the same reference for both "
-             "data types. Only seeds with a bound for both types are used, so 1M is not shown.",
-             color=MUTED, fontsize=9.5)
-    fig.subplots_adjust(left=0.11, right=0.975, top=0.8, bottom=0.2, wspace=0.18)
+                 x=0.15, ha="left", color=TEXT, fontsize=14, fontweight="bold", y=0.985)
+    fig.text(0.15, 0.885, "Mean % above the Held-Karp lower bound, the same reference for both "
+             "data types. Only seeds with a bound for both types are used, so 1M is not shown.\n"
+             + CODE_KEY + ".", color=MUTED, fontsize=9.5)
+    fig.subplots_adjust(left=0.15, right=0.975, top=0.78, bottom=0.2, wspace=0.18)
 
     out = ROOT / "results" / "clustered_vs_uniform.png"
     fig.savefig(out, dpi=170, facecolor=SURFACE)

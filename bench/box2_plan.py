@@ -12,8 +12,9 @@ also records the tour before cleanup (start_length) and after 2-opt
     py bench/box2_plan.py A                       # screen at N = 10,000
     py bench/box2_plan.py B --curves hilbert,moore,peano --merges M3,M4
     py bench/box2_plan.py C --settings hilbert:M4:10,moore:M4:8
+    py bench/box2_plan.py D                       # scaling: key settings, 1k to 1M
 then
-    py bench/run.py --config bench/box2_stageA.json      (B, C likewise)
+    py bench/run.py --config bench/box2_stageA.json      (B, C, D likewise)
 
 Names: box:<curve>:<merge>:t<t>  (e.g. box:hilbert:M1:t10, the reference),
 curve:<curve> (the curve's own order, no boxes, no cleanup), and the
@@ -29,7 +30,13 @@ CURVES = ["hilbert", "moore", "sierpinski", "knopp", "peano", "morton", "strip"]
 MERGES = ["M1", "M2", "M3", "M4", "M5"]
 TS = [4, 6, 8, 10, 12]
 REFERENCE = ("hilbert", "M1", 10)
-SEEDS = {"10k": [0, 1, 2], "100k": [0, 1, 2]}
+SEEDS = {"1k": list(range(10)), "10k": [0, 1, 2], "100k": [0, 1, 2], "1M": [0, 1, 2]}
+# stage D (scaling, 1k to 1M): the reference, the 4 finalists, the best clustered
+# setting of Stage A (hilbert M5 t=10, added after the first stage D run) and the
+# 2 best plain curves
+KEY_SETTINGS = [("hilbert", "M1", 10), ("knopp", "M1", 10), ("sierpinski", "M1", 10),
+                ("sierpinski", "M2", 12), ("sierpinski", "M5", 4), ("hilbert", "M5", 10)]
+KEY_CURVES = ["sierpinski", "moore"]
 
 EXISTING = [
     {"name": "greedy",    "exe": "codes/greedy.exe"},
@@ -54,23 +61,23 @@ def box(curve, merge, t):
                   "--t", str(t), "--cleanup", "oropt"])
 
 
-def baselines(with_curves):
-    algs = [entry(e["name"], e["exe"], max_n=e.get("max_n", 10000000)) for e in EXISTING]
+def baselines(curves, skip=()):
+    algs = [entry(e["name"], e["exe"], max_n=e.get("max_n", 10000000))
+            for e in EXISTING if e["name"] not in skip]
     algs.append(entry("greedy+2opt+oropt", "solvers/boxtsp.exe",
                       ["--start", "greedy", "--cleanup", "oropt"]))
-    if with_curves:
-        algs += [entry(f"curve:{c}", "solvers/boxtsp.exe",
-                       ["--start", "curve", "--curve", c, "--cleanup", "none"]) for c in CURVES]
+    algs += [entry(f"curve:{c}", "solvers/boxtsp.exe",
+                   ["--start", "curve", "--curve", c, "--cleanup", "none"]) for c in curves]
     return algs
 
 
-def write(stage, size, algs):
+def write(stage, sizes, algs):
     cfg = {
         "instance_dir": "C:/Users/Natha/tsp-instances-box",
         "bounds_file": "refs/bounds",
         "length_exe": "codes/length.exe",
         "results_csv": "results/box2/runs.csv",
-        "instances": [f"{p}{size}.{s}" for p in "EC" for s in SEEDS[size]],
+        "instances": [f"{p}{size}.{s}" for size in sizes for p in "EC" for s in SEEDS[size]],
         "algorithms": algs,
     }
     path = ROOT / "bench" / f"box2_stage{stage}.json"
@@ -82,15 +89,15 @@ def write(stage, size, algs):
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("stage", choices=["A", "B", "C"])
+    ap.add_argument("stage", choices=["A", "B", "C", "D"])
     ap.add_argument("--curves", help="stage B: the 3 best curves, comma-separated")
     ap.add_argument("--merges", help="stage B: the 2 best merges, comma-separated")
     ap.add_argument("--settings", help="stage C: curve:merge:t finalists, comma-separated")
     args = ap.parse_args()
 
     if args.stage == "A":            # screen: every curve x merge, t = 10
-        algs = [box(c, m, 10) for c in CURVES for m in MERGES] + baselines(True)
-        write("A", "10k", algs)
+        algs = [box(c, m, 10) for c in CURVES for m in MERGES] + baselines(CURVES)
+        write("A", ["10k"], algs)
     elif args.stage == "B":          # t sweep for the best curves x merges (+ reference)
         curves = args.curves.split(",")
         merges = args.merges.split(",")
@@ -98,13 +105,16 @@ def main():
         if (REFERENCE[0], REFERENCE[1]) not in combos:
             combos.append((REFERENCE[0], REFERENCE[1]))
         algs = [box(c, m, t) for c, m in combos for t in TS]
-        write("B", "10k", algs)
-    else:                            # scale: finalists + reference at N = 100,000
+        write("B", ["10k"], algs)
+    elif args.stage == "C":          # scale: finalists + reference at N = 100,000
         settings = [s.split(":") for s in args.settings.split(",")]
         if [REFERENCE[0], REFERENCE[1], str(REFERENCE[2])] not in settings:
             settings.append([REFERENCE[0], REFERENCE[1], str(REFERENCE[2])])
-        algs = [box(c, m, int(t)) for c, m, t in settings] + baselines(False)
-        write("C", "100k", algs)
+        algs = [box(c, m, int(t)) for c, m, t in settings] + baselines([])
+        write("C", ["100k"], algs)
+    else:                            # scaling 1k to 1M: key settings + baselines, no nn
+        algs = [box(c, m, t) for c, m, t in KEY_SETTINGS] + baselines(KEY_CURVES, skip={"nn"})
+        write("D", ["1k", "10k", "100k", "1M"], algs)
 
 
 if __name__ == "__main__":

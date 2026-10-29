@@ -24,7 +24,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from common import ROOT, load_bounds
+from common import CODE_KEY, ROOT, load_bounds
 
 T_RUNS = {"boxes+2opt+oropt-t6": 6, "boxes+2opt+oropt-t8": 8,
           "boxes+2opt+oropt": 10, "boxes+2opt+oropt-t12": 12}
@@ -70,8 +70,8 @@ def main():
                          "axes.edgecolor": MUTED, "axes.labelcolor": MUTED,
                          "xtick.color": MUTED, "ytick.color": MUTED})
     fig, axes = plt.subplots(1, 2, figsize=(15, 6.2), facecolor=SURFACE)
-    titles = {"alone": "Box tour alone (no cleanup)",
-              "cleaned": "Box tour + 2-opt + Or-opt"}
+    titles = {"alone": "hilbert B M1",
+              "cleaned": "hilbert BTO Rn M1"}
 
     for ax, panel in zip(axes, ("alone", "cleaned")):
         ax.set_facecolor(SURFACE)
@@ -115,10 +115,11 @@ def main():
                frameon=False, fontsize=10, labelcolor=TEXT)
     fig.suptitle("Box size t: a small gain on the box tour, and none left after cleanup",
                  x=0.055, ha="left", color=TEXT, fontsize=14, fontweight="bold", y=0.985)
-    fig.text(0.055, 0.875, "Mean % above the Held-Karp bound (10 seeds at 1k, 3 at 10k, 2 at 100k). "
+    fig.text(0.055, 0.86, "Mean % above the Held-Karp bound (10 seeds at 1k, 3 at 10k, 2 at 100k). "
              "Both panels use the same vertical scale, so slopes compare directly.\n"
-             "Labels: value at t = 12, and in brackets the change since t = 6 (negative = better).", color=MUTED, fontsize=9.5)
-    fig.subplots_adjust(left=0.055, right=0.87, top=0.82, bottom=0.2, wspace=0.55)
+             "Labels: value at t = 12, and in brackets the change since t = 6 (negative = better).\n"
+             + CODE_KEY + ".", color=MUTED, fontsize=9.5)
+    fig.subplots_adjust(left=0.055, right=0.87, top=0.79, bottom=0.2, wspace=0.55)
 
     out = ROOT / "results" / "box_t_sweep.png"
     fig.savefig(out, dpi=170, facecolor=SURFACE)

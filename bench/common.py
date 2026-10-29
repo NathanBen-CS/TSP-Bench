@@ -194,3 +194,45 @@ def parse_tour_length(stdout):
 def parse_extras(stdout):
     """Solver lines of the form key=value become extra result columns."""
     return dict(re.findall(r"^\s*([A-Za-z_]\w*)=(\S+)\s*$", stdout, re.MULTILINE))
+
+
+# ---------------------------------------------------------------- chart names
+
+CODE_KEY = ("Codes: bare name = that order only; B = boxes (exact loops + merge); "
+            "T = 2-opt; O = Or-opt; R1 = one cleanup round; Rn = rounds until nothing improves")
+
+
+def config_label(algorithm, level="full"):
+    """Code name of a run for charts: <start> [B][T][O] [R1|Rn] [merge t=..].
+
+    B = boxes (exact Held-Karp loops + merge), T = 2-opt, O = Or-opt; a bare
+    name means just following that order.  Every name with a cleanup (T or O)
+    says how long it ran: R1 = one round of the work queue (the bench's
+    twoopt and twoopt_or), Rn = rounds repeated until a whole round makes no
+    move (every boxtsp cleanup).  level picks the cleanup stage of a box run
+    whose tour was recorded at several stages: "none", "2opt", "full".
+    """
+    stage = {"none": "", "2opt": "T Rn", "full": "TO Rn"}[level]
+    fixed = {
+        "greedy": "greedy",                       # DIMACS greedy, no cleanup
+        "nn": "nn",
+        "spacefill": "hilbert (spacefill)",       # Hilbert order, coarser grid
+        "twoopt": "greedy T R1",                  # bench twoopt: greedy start, one round
+        "twoopt_or": "greedy TO R1",              # bench twoopt_or
+        "greedy+2opt+oropt": "greedy TO Rn",      # cleanup repeated until clean
+        "hilbert-only": "hilbert",
+        "boxes-only": "hilbert B M1 t=10",
+        "boxes+2opt": "hilbert BT Rn M1 t=10",
+        "boxes+2opt+oropt": "hilbert BTO Rn M1 t=10",
+    }
+    if algorithm in fixed:
+        return fixed[algorithm]
+    m = re.fullmatch(r"boxes\+2opt\+oropt-t(\d+)", algorithm)       # box experiment
+    if m:
+        return f"hilbert BTO Rn M1 t={m.group(1)}"
+    m = re.fullmatch(r"box:(\w+):(M\d):t(\d+)", algorithm)          # 2D extension
+    if m:
+        return f"{m.group(1)} B{stage} {m.group(2)} t={m.group(3)}"
+    if algorithm.startswith("curve:"):
+        return algorithm[6:]
+    return algorithm

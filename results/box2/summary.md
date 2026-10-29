@@ -1,6 +1,6 @@
 # Box-TSP 2D extension: results
 
-Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1:t10`. "vs ref" = % longer than the reference on the same instance (negative = shorter), mean ± sample std dev over seeds. "vs HK" = % above the Held-Karp bound. Cleanup levels: none (box tour as merged), 2-opt, full (2-opt then 2-opt + Or-opt).
+Raw runs: `results/box2/runs.csv` (878 rows). Reference setting: `box:hilbert:M1:t10`. "vs ref" = % longer than the reference on the same instance (negative = shorter), mean ± sample std dev over seeds. "vs HK" = % above the Held-Karp bound. Cleanup levels: none (box tour as merged), 2-opt, full (2-opt then 2-opt + Or-opt).
 
 ## clustered, 100k cities (3 seeds)
 
@@ -8,7 +8,7 @@ Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1
 
 | curve | M1 | M2 | M3 | M4 | M5 |
 |---|---|---|---|---|---|
-| hilbert | +0.00 ± 0.00 | – | – | – | – |
+| hilbert | +0.00 ± 0.00 | – | – | – | -11.44 ± 0.35 |
 | moore | – | – | – | – | – |
 | sierpinski | +1.65 ± 0.18 | – | – | – | – |
 | knopp | +2.12 ± 0.45 | – | – | – | – |
@@ -20,7 +20,7 @@ Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1
 
 | curve | M1 | M2 | M3 | M4 | M5 |
 |---|---|---|---|---|---|
-| hilbert | +0.00 ± 0.00 | – | – | – | – |
+| hilbert | +0.00 ± 0.00 | – | – | – | -4.64 ± 0.15 |
 | moore | – | – | – | – | – |
 | sierpinski | -1.98 ± 0.12 | – | – | – | – |
 | knopp | -2.01 ± 0.05 | – | – | – | – |
@@ -32,7 +32,7 @@ Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1
 
 | curve | M1 | M2 | M3 | M4 | M5 |
 |---|---|---|---|---|---|
-| hilbert | +0.00 ± 0.00 | – | – | – | – |
+| hilbert | +0.00 ± 0.00 | – | – | – | -2.78 ± 0.23 |
 | moore | – | – | – | – | – |
 | sierpinski | -1.13 ± 0.15 | – | – | – | – |
 | knopp | -1.12 ± 0.02 | – | – | – | – |
@@ -45,10 +45,13 @@ Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1
 | setting | vs ref: none | vs ref: 2-opt | vs ref: full | vs HK: full (n) | join cost / box tour | user s |
 |---|---|---|---|---|---|---|
 | box:hilbert:M1:t10 | +0.00 ± 0.00 | +0.00 ± 0.00 | +0.00 ± 0.00 | +17.59 (2) | 0.273 | 1.68 |
+| box:hilbert:M5:t10 | -11.44 ± 0.35 | -4.64 ± 0.15 | -2.78 ± 0.23 | +14.45 (2) | 0.179 | 2.16 |
 | box:knopp:M1:t10 | +2.12 ± 0.45 | -2.01 ± 0.05 | -1.12 ± 0.02 | +16.29 (2) | 0.140 | 1.92 |
 | box:sierpinski:M1:t10 | +1.65 ± 0.18 | -1.98 ± 0.12 | -1.13 ± 0.15 | +16.32 (2) | 0.136 | 1.90 |
 | box:sierpinski:M2:t12 | +0.11 ± 0.15 | -2.04 ± 0.38 | -1.40 ± 0.31 | +15.77 (2) | 0.119 | 4.35 |
 | box:sierpinski:M5:t4 | -9.58 ± 0.47 | -4.88 ± 0.12 | -2.91 ± 0.25 | +14.34 (2) | 0.196 | 1.86 |
+| curve:moore | +6.04 ± 0.20 | – | +31.88 ± 0.22 | +54.94 (2) | – | 0.16 |
+| curve:sierpinski | +3.98 ± 0.27 | – | +29.32 ± 0.02 | +52.05 (2) | – | 0.23 |
 | greedy | – | – | +3.60 ± 0.39 | +21.74 (2) | – | 0.56 |
 | greedy+2opt+oropt | -16.96 ± 0.32 | -10.94 ± 0.54 | -6.59 ± 0.67 | +9.51 (2) | – | 1.08 |
 | nn | – | – | +12.45 ± 0.36 | +31.99 (2) | – | 75.55 |
@@ -62,7 +65,7 @@ Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1
 
 | curve | M1 | M2 | M3 | M4 | M5 |
 |---|---|---|---|---|---|
-| hilbert | +0.00 ± 0.00 | – | – | – | – |
+| hilbert | +0.00 ± 0.00 | – | – | – | -3.57 ± 0.16 |
 | moore | – | – | – | – | – |
 | sierpinski | +6.66 ± 0.12 | – | – | – | – |
 | knopp | +6.77 ± 0.22 | – | – | – | – |
@@ -74,7 +77,7 @@ Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1
 
 | curve | M1 | M2 | M3 | M4 | M5 |
 |---|---|---|---|---|---|
-| hilbert | +0.00 ± 0.00 | – | – | – | – |
+| hilbert | +0.00 ± 0.00 | – | – | – | -0.11 ± 0.23 |
 | moore | – | – | – | – | – |
 | sierpinski | -1.33 ± 0.18 | – | – | – | – |
 | knopp | -1.34 ± 0.20 | – | – | – | – |
@@ -86,7 +89,7 @@ Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1
 
 | curve | M1 | M2 | M3 | M4 | M5 |
 |---|---|---|---|---|---|
-| hilbert | +0.00 ± 0.00 | – | – | – | – |
+| hilbert | +0.00 ± 0.00 | – | – | – | +0.96 ± 0.23 |
 | moore | – | – | – | – | – |
 | sierpinski | -0.45 ± 0.28 | – | – | – | – |
 | knopp | -0.45 ± 0.24 | – | – | – | – |
@@ -99,10 +102,13 @@ Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1
 | setting | vs ref: none | vs ref: 2-opt | vs ref: full | vs HK: full (n) | join cost / box tour | user s |
 |---|---|---|---|---|---|---|
 | box:hilbert:M1:t10 | +0.00 ± 0.00 | +0.00 ± 0.00 | +0.00 ± 0.00 | +8.34 (2) | 0.020 | 1.67 |
+| box:hilbert:M5:t10 | -3.57 ± 0.16 | -0.11 ± 0.23 | +0.96 ± 0.23 | +9.50 (2) | -0.017 | 2.16 |
 | box:knopp:M1:t10 | +6.77 ± 0.22 | -1.34 ± 0.20 | -0.45 ± 0.24 | +8.00 (2) | -0.056 | 1.94 |
 | box:sierpinski:M1:t10 | +6.66 ± 0.12 | -1.33 ± 0.18 | -0.45 ± 0.28 | +8.02 (2) | -0.057 | 1.94 |
 | box:sierpinski:M2:t12 | +5.09 ± 0.16 | -1.12 ± 0.15 | -0.26 ± 0.17 | +8.17 (2) | -0.063 | 4.81 |
 | box:sierpinski:M5:t4 | -1.69 ± 0.14 | -1.16 ± 0.24 | +0.32 ± 0.32 | +8.88 (2) | 0.010 | 1.84 |
+| curve:moore | +7.60 ± 0.04 | – | +27.15 ± 0.37 | +37.99 (2) | – | 0.17 |
+| curve:sierpinski | +5.17 ± 0.08 | – | +24.29 ± 0.46 | +34.94 (2) | – | 0.22 |
 | greedy | – | – | +5.73 ± 0.32 | +14.73 (2) | – | 0.58 |
 | greedy+2opt+oropt | -10.34 ± 0.18 | -8.96 ± 0.27 | -4.04 ± 0.41 | +4.18 (2) | – | 1.08 |
 | nn | – | – | +13.91 ± 0.33 | +23.57 (2) | – | 75.84 |
@@ -371,6 +377,230 @@ Raw runs: `results/box2/runs.csv` (522 rows). Reference setting: `box:hilbert:M1
 | moore M5 | -2.08 → +0.66 | -3.08 → +1.01 | -3.74 → +0.96 | -5.12 → +0.91 | -6.25 → +0.84 |
 | sierpinski M2 | -1.65 → -0.12 | +0.38 → -0.39 | +2.60 → -0.41 | +3.52 → -0.50 | +3.88 → -0.49 |
 | sierpinski M5 | -2.83 → +0.57 | -2.86 → +0.36 | -2.24 → +0.07 | -2.25 → -0.20 | -2.57 → -0.06 |
+
+## clustered, 1M cities (3 seeds)
+
+**Curve × merge at t = 10, cleanup = none: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | -11.34 ± 0.06 |
+| moore | – | – | – | – | – |
+| sierpinski | +2.00 ± 0.02 | – | – | – | – |
+| knopp | +2.00 ± 0.02 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Curve × merge at t = 10, cleanup = 2opt: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | -4.14 ± 0.19 |
+| moore | – | – | – | – | – |
+| sierpinski | -1.28 ± 0.08 | – | – | – | – |
+| knopp | -1.28 ± 0.10 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Curve × merge at t = 10, cleanup = full: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | -2.32 ± 0.13 |
+| moore | – | – | – | – | – |
+| sierpinski | -0.73 ± 0.05 | – | – | – | – |
+| knopp | -0.70 ± 0.06 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Every setting**
+
+| setting | vs ref: none | vs ref: 2-opt | vs ref: full | vs HK: full (n) | join cost / box tour | user s |
+|---|---|---|---|---|---|---|
+| box:hilbert:M1:t10 | +0.00 ± 0.00 | +0.00 ± 0.00 | +0.00 ± 0.00 | – | – | 26.60 |
+| box:hilbert:M5:t10 | -11.34 ± 0.06 | -4.14 ± 0.19 | -2.32 ± 0.13 | – | 0.175 | 28.95 |
+| box:knopp:M1:t10 | +2.00 ± 0.02 | -1.28 ± 0.10 | -0.70 ± 0.06 | – | 0.137 | 31.16 |
+| box:sierpinski:M1:t10 | +2.00 ± 0.02 | -1.28 ± 0.08 | -0.73 ± 0.05 | – | 0.137 | 28.82 |
+| box:sierpinski:M2:t12 | +0.44 ± 0.04 | -1.28 ± 0.12 | -0.65 ± 0.05 | – | 0.120 | 56.70 |
+| box:sierpinski:M5:t4 | -9.43 ± 0.05 | -4.37 ± 0.12 | -2.43 ± 0.07 | – | 0.194 | 27.16 |
+| curve:moore | +6.58 ± 0.08 | – | +32.66 ± 0.07 | – | – | 1.71 |
+| curve:sierpinski | +4.27 ± 0.02 | – | +29.78 ± 0.05 | – | – | 2.28 |
+| greedy | – | – | +3.22 ± 0.11 | – | – | 9.06 |
+| greedy+2opt+oropt | -16.94 ± 0.10 | -10.61 ± 0.03 | -6.36 ± 0.11 | – | – | 14.86 |
+| spacefill | – | – | +32.76 ± 0.04 | – | – | 1.69 |
+| twoopt | -16.94 ± 0.10 | – | -5.03 ± 0.11 | – | – | 9.22 |
+| twoopt_or | -16.94 ± 0.10 | – | -6.23 ± 0.09 | – | – | 10.08 |
+
+## uniform, 1M cities (3 seeds)
+
+**Curve × merge at t = 10, cleanup = none: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | -2.78 ± 0.02 |
+| moore | – | – | – | – | – |
+| sierpinski | +7.22 ± 0.03 | – | – | – | – |
+| knopp | +7.24 ± 0.01 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Curve × merge at t = 10, cleanup = 2opt: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | -0.76 ± 0.09 |
+| moore | – | – | – | – | – |
+| sierpinski | -1.83 ± 0.01 | – | – | – | – |
+| knopp | -1.84 ± 0.07 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Curve × merge at t = 10, cleanup = full: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | +0.88 ± 0.09 |
+| moore | – | – | – | – | – |
+| sierpinski | -0.57 ± 0.02 | – | – | – | – |
+| knopp | -0.56 ± 0.07 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Every setting**
+
+| setting | vs ref: none | vs ref: 2-opt | vs ref: full | vs HK: full (n) | join cost / box tour | user s |
+|---|---|---|---|---|---|---|
+| box:hilbert:M1:t10 | +0.00 ± 0.00 | +0.00 ± 0.00 | +0.00 ± 0.00 | +8.73 (1) | – | 23.14 |
+| box:hilbert:M5:t10 | -2.78 ± 0.02 | -0.76 ± 0.09 | +0.88 ± 0.09 | +9.78 (1) | 0.033 | 26.67 |
+| box:knopp:M1:t10 | +7.24 ± 0.01 | -1.84 ± 0.07 | -0.56 ± 0.07 | +8.05 (1) | -0.058 | 28.75 |
+| box:sierpinski:M1:t10 | +7.22 ± 0.03 | -1.83 ± 0.01 | -0.57 ± 0.02 | +8.09 (1) | -0.058 | 29.14 |
+| box:sierpinski:M2:t12 | +5.50 ± 0.02 | -1.61 ± 0.04 | -0.40 ± 0.01 | +8.29 (1) | -0.066 | 58.10 |
+| box:sierpinski:M5:t4 | -1.40 ± 0.03 | -1.55 ± 0.11 | +0.43 ± 0.12 | +9.09 (1) | 0.006 | 26.94 |
+| curve:moore | +8.00 ± 0.00 | – | +27.10 ± 0.06 | +38.13 (1) | – | 1.75 |
+| curve:sierpinski | +5.60 ± 0.02 | – | +24.28 ± 0.05 | +35.09 (1) | – | 2.25 |
+| greedy | – | – | +5.10 ± 0.06 | +14.26 (1) | – | 9.24 |
+| greedy+2opt+oropt | -10.73 ± 0.07 | -8.73 ± 0.25 | -3.38 ± 0.26 | +4.76 (1) | – | 20.21 |
+| spacefill | – | – | +27.19 ± 0.04 | +38.25 (1) | – | 1.62 |
+| twoopt | -10.73 ± 0.07 | – | -2.43 ± 0.23 | +5.87 (1) | – | 9.80 |
+| twoopt_or | -10.73 ± 0.07 | – | -3.28 ± 0.28 | +4.86 (1) | – | 11.41 |
+
+## clustered, 1k cities (10 seeds)
+
+**Curve × merge at t = 10, cleanup = none: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | -7.17 ± 4.58 |
+| moore | – | – | – | – | – |
+| sierpinski | -1.82 ± 2.76 | – | – | – | – |
+| knopp | +1.02 ± 5.37 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Curve × merge at t = 10, cleanup = 2opt: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | -0.06 ± 5.08 |
+| moore | – | – | – | – | – |
+| sierpinski | -2.28 ± 3.51 | – | – | – | – |
+| knopp | -1.62 ± 4.73 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Curve × merge at t = 10, cleanup = full: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | +1.31 ± 4.50 |
+| moore | – | – | – | – | – |
+| sierpinski | -1.24 ± 2.52 | – | – | – | – |
+| knopp | -1.04 ± 3.67 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Every setting**
+
+| setting | vs ref: none | vs ref: 2-opt | vs ref: full | vs HK: full (n) | join cost / box tour | user s |
+|---|---|---|---|---|---|---|
+| box:hilbert:M1:t10 | +0.00 ± 0.00 | +0.00 ± 0.00 | +0.00 ± 0.00 | +10.45 (10) | – | 0.01 |
+| box:hilbert:M5:t10 | -7.17 ± 4.58 | -0.06 ± 5.08 | +1.31 ± 4.50 | +11.83 (10) | 0.225 | 0.02 |
+| box:knopp:M1:t10 | +1.02 ± 5.37 | -1.62 ± 4.73 | -1.04 ± 3.67 | +9.23 (10) | 0.168 | 0.02 |
+| box:sierpinski:M1:t10 | -1.82 ± 2.76 | -2.28 ± 3.51 | -1.24 ± 2.52 | +9.02 (10) | 0.143 | 0.01 |
+| box:sierpinski:M2:t12 | -3.84 ± 2.83 | -2.50 ± 2.75 | -1.51 ± 2.51 | +8.72 (10) | 0.122 | 0.03 |
+| box:sierpinski:M5:t4 | -6.72 ± 4.80 | -0.20 ± 4.55 | +0.52 ± 3.81 | +10.97 (10) | 0.232 | 0.01 |
+| curve:moore | +4.71 ± 3.76 | – | +32.12 ± 5.89 | +45.82 (10) | – | 0.01 |
+| curve:sierpinski | +0.86 ± 3.05 | – | +27.25 ± 4.84 | +40.44 (10) | – | 0.00 |
+| greedy | – | – | +8.32 ± 5.12 | +19.52 (10) | – | 0.01 |
+| greedy+2opt+oropt | -14.48 ± 2.55 | -6.65 ± 4.20 | -2.63 ± 4.23 | +7.45 (10) | – | 0.01 |
+| spacefill | – | – | +34.08 ± 4.97 | +47.99 (10) | – | 0.01 |
+| twoopt | -14.48 ± 2.55 | – | -1.43 ± 4.30 | +8.77 (10) | – | 0.02 |
+| twoopt_or | -14.48 ± 2.55 | – | -2.89 ± 3.90 | +7.17 (10) | – | 0.01 |
+
+## uniform, 1k cities (10 seeds)
+
+**Curve × merge at t = 10, cleanup = none: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | -4.65 ± 0.95 |
+| moore | – | – | – | – | – |
+| sierpinski | +4.41 ± 1.33 | – | – | – | – |
+| knopp | +5.38 ± 3.05 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Curve × merge at t = 10, cleanup = 2opt: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | +1.22 ± 1.11 |
+| moore | – | – | – | – | – |
+| sierpinski | -0.27 ± 1.10 | – | – | – | – |
+| knopp | -0.30 ± 1.06 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Curve × merge at t = 10, cleanup = full: vs ref (%)**
+
+| curve | M1 | M2 | M3 | M4 | M5 |
+|---|---|---|---|---|---|
+| hilbert | +0.00 ± 0.00 | – | – | – | +1.45 ± 0.77 |
+| moore | – | – | – | – | – |
+| sierpinski | +0.09 ± 0.92 | – | – | – | – |
+| knopp | -0.08 ± 0.72 | – | – | – | – |
+| peano | – | – | – | – | – |
+| morton | – | – | – | – | – |
+| strip | – | – | – | – | – |
+
+**Every setting**
+
+| setting | vs ref: none | vs ref: 2-opt | vs ref: full | vs HK: full (n) | join cost / box tour | user s |
+|---|---|---|---|---|---|---|
+| box:hilbert:M1:t10 | +0.00 ± 0.00 | +0.00 ± 0.00 | +0.00 ± 0.00 | +7.51 (10) | – | 0.01 |
+| box:hilbert:M5:t10 | -4.65 ± 0.95 | +1.22 ± 1.11 | +1.45 ± 0.77 | +9.06 (10) | 0.047 | 0.01 |
+| box:knopp:M1:t10 | +5.38 ± 3.05 | -0.30 ± 1.06 | -0.08 ± 0.72 | +7.42 (10) | -0.045 | 0.02 |
+| box:sierpinski:M1:t10 | +4.41 ± 1.33 | -0.27 ± 1.10 | +0.09 ± 0.92 | +7.61 (10) | -0.055 | 0.02 |
+| box:sierpinski:M2:t12 | +2.36 ± 0.95 | -0.57 ± 0.75 | +0.08 ± 0.73 | +7.59 (10) | -0.067 | 0.03 |
+| box:sierpinski:M5:t4 | -3.47 ± 1.62 | -0.45 ± 1.54 | +0.84 ± 1.26 | +8.41 (10) | 0.012 | 0.01 |
+| curve:moore | +4.81 ± 1.50 | – | +25.70 ± 1.64 | +35.13 (10) | – | 0.01 |
+| curve:sierpinski | +2.56 ± 1.14 | – | +23.01 ± 1.40 | +32.24 (10) | – | 0.01 |
+| greedy | – | – | +9.78 ± 2.37 | +18.02 (10) | – | 0.01 |
+| greedy+2opt+oropt | -8.68 ± 1.51 | -7.20 ± 0.63 | -3.14 ± 0.46 | +4.13 (10) | – | 0.01 |
+| spacefill | – | – | +29.01 ± 1.15 | +38.70 (10) | – | 0.01 |
+| twoopt | -8.68 ± 1.51 | – | -2.06 ± 0.62 | +5.29 (10) | – | 0.01 |
+| twoopt_or | -8.68 ± 1.51 | – | -3.13 ± 0.60 | +4.14 (10) | – | 0.01 |
 
 ## Ranking at 10k (full cleanup, uniform and clustered pooled)
 
