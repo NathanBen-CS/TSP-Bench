@@ -8,16 +8,16 @@ then 2-opt + Or-opt; the best solver in the bench).  0 = as good as greedy
 TO, lower is better.  It is used because the 1M maps we generated have no
 Held-Karp bound, so a gap to Held-Karp can't be given there.
 
-  results/scale_1M.png        one row per solver, at 1,000,000 cities:
+  results/2d/scale_1M.png        one row per solver, at 1,000,000 cities:
                               quality (left) and seconds (right),
                               blue = uniform maps, orange = clustered maps
-  results/scale_growth.png    one small panel per cleanup solver: its
+  results/2d/scale_growth.png    one small panel per cleanup solver: its
                               quality at 1k, 10k, 100k and 1M cities
-  results/tsplib_summary.png  one bar per solver on the TSPLIB maps
+  results/2d/tsplib_summary.png  one bar per solver on the TSPLIB maps
                               (% above Held-Karp, which TSPLIB maps all have)
 
-Scaling data: the uniform + clustered set (results/box2/runs.csv; 10 maps of
-each type at 1k, 3 at 10k, 100k and 1M).  TSPLIB data: results/runs.csv.
+Scaling data: the uniform + clustered set (results/2d/box2/runs.csv; 10 maps of
+each type at 1k, 3 at 10k, 100k and 1M).  TSPLIB data: results/2d/runs.csv.
 A value is the mean over the maps of that size.
 
 "hilbert B M1 t=10" (the box tour with no cleanup) is not a separate run: it
@@ -256,11 +256,11 @@ def chart_tsplib(runs, bounds, out):
 
 def main():
     setup()
-    box = load(ROOT / "results" / "box2" / "runs.csv")
-    chart_1m(box, ROOT / "results" / "scale_1M.png")
-    chart_growth(box, ROOT / "results" / "scale_growth.png")
-    chart_tsplib(load(ROOT / "results" / "runs.csv"), load_bounds(ROOT / "refs" / "bounds"),
-                 ROOT / "results" / "tsplib_summary.png")
+    box = load(ROOT / "results" / "2d" / "box2" / "runs.csv")
+    chart_1m(box, ROOT / "results" / "2d" / "scale_1M.png")
+    chart_growth(box, ROOT / "results" / "2d" / "scale_growth.png")
+    chart_tsplib(load(ROOT / "results" / "2d" / "runs.csv"), load_bounds(ROOT / "refs" / "bounds"),
+                 ROOT / "results" / "2d" / "tsplib_summary.png")
 
 
 if __name__ == "__main__":

@@ -4,9 +4,9 @@ The 34 maps in `big/` are the TSPLIB maps used by the DIMACS challenge. Unlike
 the generated E/C maps, they come from real applications. This page ranks every
 algorithm in the bench on them, separately for each type of problem.
 
-- **Chart:** `results/real_world.png` (top 5 per type)
-- **Full rankings and per-map numbers:** `results/real_world.md`
-- **Script:** `bench/real_world.py`. It only reads `results/runs.csv`; no new runs
+- **Chart:** `results/2d/real_world.png` (top 5 per type)
+- **Full rankings and per-map numbers:** `results/2d/real_world.md`
+- **Script:** `bench/real_world.py`. It only reads `results/2d/runs.csv`; no new runs
   were needed (section 5).
 
 Codes: a bare name = that order only; B = boxes (exact loops + merge); T = 2-opt;
@@ -131,5 +131,5 @@ circuit-board drilling problem.
 ## 6. Reproduce
 
 ```powershell
-py bench\real_world.py        # writes results\real_world.md and results\real_world.png
+py bench\real_world.py        # writes results\2d\real_world.md and results\2d\real_world.png
 ```

@@ -2,7 +2,7 @@
 from codes/README (pinned to CPU 0, twice each by default) and record the user
 times, so readers can rescale your solver times to their machine.
 
-Also writes results/machine.json describing this machine and the compiler
+Also writes results/2d/machine.json describing this machine and the compiler
 settings used for codes/ and solvers/.
 
     python bench/machine_bench.py
@@ -83,7 +83,7 @@ def main():
     greedy = ROOT / "codes" / "greedy.exe"
     pin_to_core0()
 
-    out_dir = ROOT / "results"
+    out_dir = ROOT / "results" / "2d"
     out_dir.mkdir(exist_ok=True)
     rows = []
     for name, iters in benchmark_list():
@@ -126,7 +126,7 @@ def main():
     }
     with open(out_dir / "machine.json", "w") as f:
         json.dump(info, f, indent=2)
-    print(f"Wrote results/machine_bench.csv and results/machine.json ({info['cpu']})")
+    print(f"Wrote results/2d/machine_bench.csv and results/2d/machine.json ({info['cpu']})")
 
 
 if __name__ == "__main__":

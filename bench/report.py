@@ -1,4 +1,4 @@
-"""Turn results/runs.csv into the report.
+"""Turn results/2d/runs.csv into the report.
 
     gap over HK  = (tour length - Held-Karp bound) / Held-Karp bound x 100
     gap over opt = (tour length - optimal) / optimal x 100
@@ -6,8 +6,8 @@
 Both references come from refs/bounds (DIMACS "bounds" file: name, HK bound,
 and optimal / best-known length where available).
 
-Writes results/report.md (one table per algorithm + machine benchmark) and
-results/report_full.csv (every run with gaps and extras as columns).
+Writes results/2d/report.md (one table per algorithm + machine benchmark) and
+results/2d/report_full.csv (every run with gaps and extras as columns).
 
     python bench/report.py
 """
@@ -51,7 +51,7 @@ def main():
         by_alg[r["algorithm"]].append(r)
 
     lines = ["# TSP benchmark report", ""]
-    machine = ROOT / "results" / "machine.json"
+    machine = ROOT / "results" / "2d" / "machine.json"
     if machine.exists():
         info = json.loads(machine.read_text())
         lines += ["## Machine", "", md_table(["Field", "Value"], list(info.items())), ""]
@@ -69,7 +69,7 @@ def main():
         for r in rows:
             full_rows.append({**{k: v for k, v in r.items() if k != "extras"}, **r["extras"]})
 
-    bench = ROOT / "results" / "machine_bench.csv"
+    bench = ROOT / "results" / "2d" / "machine_bench.csv"
     if bench.exists():
         with open(bench, newline="") as f:
             b = list(csv.DictReader(f))

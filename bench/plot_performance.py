@@ -1,7 +1,7 @@
 """One chart of solver performance: tour quality and running time against
 instance size, on the uniform instances of the box experiment.
 
-    py bench/plot_performance.py                 # writes results/solver_performance.png
+    py bench/plot_performance.py                 # writes results/2d/solver_performance.png
 
 Left: mean % above 0.7124 * sqrt(N * A) (the uniform-data estimate of the
 optimal tour), lower is better.  Right: mean user CPU seconds, log scale.
@@ -35,7 +35,7 @@ TIMER_FLOOR = 0.01            # Windows CPU time comes in ~0.016 s ticks
 
 def main():
     gaps, times = defaultdict(list), defaultdict(list)
-    with open(ROOT / "results" / "box" / "runs.csv", newline="") as f:
+    with open(ROOT / "results" / "2d" / "box" / "runs.csv", newline="") as f:
         for r in csv.DictReader(f):
             if r["status"] != "OK" or not r["instance"].startswith("E"):
                 continue
@@ -108,7 +108,7 @@ def main():
              + CODE_KEY + ".", color=MUTED, fontsize=9.5)
     fig.subplots_adjust(left=0.055, right=0.82, top=0.82, bottom=0.24, wspace=0.9)
 
-    out = ROOT / "results" / "solver_performance.png"
+    out = ROOT / "results" / "2d" / "solver_performance.png"
     fig.savefig(out, dpi=170, facecolor=SURFACE)
     print(f"Wrote {out}")
 

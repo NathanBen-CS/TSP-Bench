@@ -8,3 +8,23 @@ big/*.tsp
 
 # Python
 __pycache__/
+
+# 3D instances (bench/gen_instances3d.py, bench/get_star.py rebuild them)
+data3d/
+
+# build output of solvers/Makefile
+build/
+bin/
+
+# old files moved out of the way, nothing is deleted
+_to_delete/
+
+# 3D instances (bench/gen_instances3d.py, bench/get_star.py rebuild them)
+data3d/
+
+# build output of solvers/Makefile
+build/
+bin/
+
+# old files moved out of the way, nothing is deleted
+_to_delete/

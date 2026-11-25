@@ -1,0 +1,111 @@
+{
+ "instance_dir": "data3d/instances",
+ "bounds_file": "refs/bounds3d",
+ "length_exe": "bin/length3d.exe",
+ "results_csv": "results/3d/runs.csv",
+ "instances": [
+  "E3d1k.0",
+  "E3d1k.1",
+  "E3d1k.2",
+  "C3d1k.0",
+  "C3d1k.1",
+  "C3d1k.2",
+  "CT3d1k.0",
+  "CT3d1k.1",
+  "CT3d1k.2",
+  "E3d10k.0",
+  "E3d10k.1",
+  "E3d10k.2",
+  "C3d10k.0",
+  "C3d10k.1",
+  "C3d10k.2",
+  "CT3d10k.0",
+  "CT3d10k.1",
+  "CT3d10k.2",
+  "E3d100k.0",
+  "E3d100k.1",
+  "E3d100k.2",
+  "C3d100k.0",
+  "C3d100k.1",
+  "C3d100k.2",
+  "CT3d100k.0",
+  "CT3d100k.1",
+  "CT3d100k.2",
+  "E3d1M.0",
+  "C3d1M.0",
+  "CT3d1M.0",
+  "star100",
+  "star1k",
+  "star10k",
+  "kj37859",
+  "hyg109399",
+  "hyg119614",
+  "star250k",
+  "gaia1"
+ ],
+ "algorithms": [
+  {
+   "name": "greedy",
+   "exe": "bin/boxtsp3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600,
+   "args": [
+    "--start",
+    "greedy",
+    "--cleanup",
+    "none"
+   ]
+  },
+  {
+   "name": "twoopt",
+   "exe": "bin/twoopt3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600
+  },
+  {
+   "name": "twoopt_or",
+   "exe": "bin/twoopt_or3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600
+  },
+  {
+   "name": "greedy+2opt",
+   "exe": "bin/boxtsp3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600,
+   "args": [
+    "--start",
+    "greedy",
+    "--cleanup",
+    "2opt"
+   ]
+  },
+  {
+   "name": "greedy+2opt+oropt",
+   "exe": "bin/boxtsp3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600,
+   "args": [
+    "--start",
+    "greedy",
+    "--cleanup",
+    "oropt"
+   ]
+  }
+ ]
+}

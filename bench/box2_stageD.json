@@ -2,7 +2,7 @@
   "instance_dir": "C:/Users/Natha/tsp-instances-box",
   "bounds_file": "refs/bounds",
   "length_exe": "codes/length.exe",
-  "results_csv": "results/box2/runs.csv",
+  "results_csv": "results/2d/box2/runs.csv",
   "instances": [
     "E1k.0",
     "E1k.1",
@@ -46,7 +46,7 @@
   "algorithms": [
     {
       "name": "box:hilbert:M1:t10",
-      "exe": "solvers/boxtsp.exe",
+      "exe": "bin/boxtsp2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -67,7 +67,7 @@
     },
     {
       "name": "box:knopp:M1:t10",
-      "exe": "solvers/boxtsp.exe",
+      "exe": "bin/boxtsp2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -88,7 +88,7 @@
     },
     {
       "name": "box:sierpinski:M1:t10",
-      "exe": "solvers/boxtsp.exe",
+      "exe": "bin/boxtsp2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -109,7 +109,7 @@
     },
     {
       "name": "box:sierpinski:M2:t12",
-      "exe": "solvers/boxtsp.exe",
+      "exe": "bin/boxtsp2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -130,7 +130,7 @@
     },
     {
       "name": "box:sierpinski:M5:t4",
-      "exe": "solvers/boxtsp.exe",
+      "exe": "bin/boxtsp2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -151,7 +151,7 @@
     },
     {
       "name": "box:hilbert:M5:t10",
-      "exe": "solvers/boxtsp.exe",
+      "exe": "bin/boxtsp2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -181,7 +181,7 @@
     },
     {
       "name": "spacefill",
-      "exe": "solvers/spacefill.exe",
+      "exe": "bin/spacefill2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -190,7 +190,7 @@
     },
     {
       "name": "twoopt",
-      "exe": "solvers/twoopt.exe",
+      "exe": "bin/twoopt2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -199,7 +199,7 @@
     },
     {
       "name": "twoopt_or",
-      "exe": "solvers/twoopt_or.exe",
+      "exe": "bin/twoopt_or2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -208,7 +208,7 @@
     },
     {
       "name": "greedy+2opt+oropt",
-      "exe": "solvers/boxtsp.exe",
+      "exe": "bin/boxtsp2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -223,7 +223,7 @@
     },
     {
       "name": "curve:sierpinski",
-      "exe": "solvers/boxtsp.exe",
+      "exe": "bin/boxtsp2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,
@@ -240,7 +240,7 @@
     },
     {
       "name": "curve:moore",
-      "exe": "solvers/boxtsp.exe",
+      "exe": "bin/boxtsp2d.exe",
       "randomized": false,
       "seeds": [],
       "geometric_only": true,

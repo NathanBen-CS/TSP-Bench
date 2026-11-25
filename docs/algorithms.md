@@ -1,7 +1,7 @@
 # Algorithm descriptions
 
 DIMACS rules: at most two pages in total. One section per algorithm that appears
-in `results/runs.csv`. For each one, say what it does, which data structures it
+in `results/2d/runs.csv`. For each one, say what it does, which data structures it
 uses, its parameters and seeds, and which **speed tricks it uses and which it
 skips**, because readers compare running times.
 
@@ -18,7 +18,7 @@ every city at degree ≤ 2 and closes no cycle early (fragment ends are tracked 
 `tail[]`). Nearest-neighbour queries use a k-d tree for geometric instances and a
 linear scan for matrix instances. Deterministic. Included unchanged as a baseline.
 
-## nn: nearest neighbour (`solvers/nn.c`)
+## nn: nearest neighbour (`solvers/common/nn.c`)
 
 - **Idea:** start at city 1 and repeatedly move to the closest unvisited city.
   The last city connects back to city 1.
@@ -31,7 +31,7 @@ linear scan for matrix instances. Deterministic. Included unchanged as a baselin
   caching of distances.
 - **Extra output:** `read_time`, `solve_time` (seconds, from `clock()`).
 
-## spacefill: space-filling curve (`solvers/spacefill.c`, `hilbert.c`)
+## spacefill: space-filling curve (`solvers/d2/spacefill.c`, `hilbert.c`)
 
 - **Idea:** scale the cities onto a 65536 × 65536 grid and visit them in the order
   a Hilbert curve passes through their cells (Bartholdi & Platzman's method, using
@@ -43,7 +43,7 @@ linear scan for matrix instances. Deterministic. Included unchanged as a baselin
   and are skipped (`geometric_only` in `bench/config.json`).
 - **Speed tricks skipped:** none relevant. The sort dominates.
 
-## twoopt: 2-opt local search (`solvers/twoopt.c`, `localsearch.c`)
+## twoopt: 2-opt local search (`solvers/common/twoopt.c`, `localsearch.c`)
 
 - **Idea:** repeatedly remove two tour edges and reconnect the tour the other way
   (reversing the path between them) whenever that shortens it. Stop at a local
@@ -75,7 +75,7 @@ linear scan for matrix instances. Deterministic. Included unchanged as a baselin
 - **Extra output:** `read_time`, `neighbor_time`, `start_time`, `start_length`,
   `search_time`, `moves_2opt`.
 
-## twoopt_or: 2-opt + Or-opt (`solvers/twoopt_or.c`, `localsearch.c`)
+## twoopt_or: 2-opt + Or-opt (`solvers/common/twoopt_or.c`, `localsearch.c`)
 
 - **Idea:** same as `twoopt`, but when a city has no improving 2-opt move, also try
   Or-opt. Or-opt cuts out a chain of 1–3 consecutive cities starting at that city
@@ -85,7 +85,7 @@ linear scan for matrix instances. Deterministic. Included unchanged as a baselin
 - **Starting tour, data structures, speed tricks, parameters:** as `twoopt`.
 - **Extra output:** as `twoopt`, plus `moves_oropt`.
 
-## boxtsp: box start tour + cleanup (`solvers/boxtsp.c`, `boxes.c`)
+## boxtsp: box start tour + cleanup (`solvers/d2/boxtsp.c`, `boxes.c`)
 
 A Karp-style partitioning heuristic (Karp 1977), with no worst-case guarantee. One
 program provides all variants of the box experiment, so they run identical code.
@@ -109,7 +109,7 @@ program provides all variants of the box experiment, so they run identical code.
   solved exactly.
 - **Parameters:** `--t` (default 10, max 12), `--k` neighbours (default 16, the
   bench's value), `--start boxes|greedy|hilbert|curve`, `--cleanup none|2opt|oropt`,
-  `--curve hilbert|moore|sierpinski|knopp|peano|morton|strip` (`curves.c`) and
+  `--curve hilbert|moore|sierpinski|knopp|peano|morton|strip` (`curves2d.c`) and
   `--merge M1..M5` (`merges.c`; M1 = the original snake glue). The defaults
   (Hilbert, M1) give exactly the original tours. Deterministic. Comparison of
   the curves and merges: `docs/box_tsp_2d.md`.

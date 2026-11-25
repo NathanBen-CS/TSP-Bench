@@ -1,0 +1,914 @@
+{
+  "instance_dir": "C:/Users/Natha/tsp-instances-box",
+  "bounds_file": "refs/bounds",
+  "length_exe": "codes/length.exe",
+  "results_csv": "results/2d/hull/runs.csv",
+  "instances": [
+    "E100k.0",
+    "E100k.1",
+    "E100k.2",
+    "C100k.0",
+    "C100k.1",
+    "C100k.2",
+    "E1M.0",
+    "C1M.0"
+  ],
+  "algorithms": [
+    {
+      "name": "hull:H0",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--split",
+        "rings",
+        "--merge",
+        "H0",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "hull:M1",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--split",
+        "rings",
+        "--merge",
+        "M1",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "hull:M2",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--split",
+        "rings",
+        "--merge",
+        "M2",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "hull:M3",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--split",
+        "rings",
+        "--merge",
+        "M3",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "hull:M4",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--split",
+        "rings",
+        "--merge",
+        "M4",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "hull:M5",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--split",
+        "rings",
+        "--merge",
+        "M5",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "curve:hull",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "hull",
+        "--cleanup",
+        "none"
+      ]
+    },
+    {
+      "name": "box:hilbert:M1:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:hilbert:M2:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:hilbert:M3:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:hilbert:M4:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:hilbert:M5:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "hilbert",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M1:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M2:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M3:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M4:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:moore:M5:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "moore",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M1:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M2:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M3:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M4:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:sierpinski:M5:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "sierpinski",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M1:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M2:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M3:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M4:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:knopp:M5:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "knopp",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M1:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M2:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M3:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M4:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:peano:M5:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "peano",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M1:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M2:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M3:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M4:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:morton:M5:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "morton",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M1:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M1",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M2:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M2",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M3:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M3",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M4:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M4",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "box:strip:M5:t10",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "boxes",
+        "--curve",
+        "strip",
+        "--merge",
+        "M5",
+        "--t",
+        "10",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "greedy+2opt+oropt",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "greedy",
+        "--cleanup",
+        "oropt"
+      ]
+    },
+    {
+      "name": "curve:hilbert",
+      "exe": "bin/boxtsp2d.exe",
+      "randomized": false,
+      "seeds": [],
+      "geometric_only": true,
+      "max_n": 10000000,
+      "timeout_s": 3600,
+      "args": [
+        "--start",
+        "curve",
+        "--curve",
+        "hilbert",
+        "--cleanup",
+        "none"
+      ]
+    }
+  ]
+}

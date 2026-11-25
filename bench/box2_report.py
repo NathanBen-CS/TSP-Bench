@@ -1,6 +1,6 @@
-"""Summarise the 2D box extension (curves x merges x t), results/box2/runs.csv.
+"""Summarise the 2D box extension (curves x merges x t), results/2d/box2/runs.csv.
 
-    py bench/box2_report.py            # writes results/box2/summary.md and .csv
+    py bench/box2_report.py            # writes results/2d/box2/summary.md and .csv
 
 For every setting and cleanup level:
   * paired difference from the reference setting (Hilbert, M1, t = 10) on
@@ -46,7 +46,7 @@ def table(header, rows):
 
 def main():
     bounds = load_bounds(ROOT / "refs" / "bounds")
-    path = ROOT / "results" / "box2" / "runs.csv"
+    path = ROOT / "results" / "2d" / "box2" / "runs.csv"
     rows = list(csv.DictReader(open(path, newline="")))
     problems = defaultdict(int)
     runs = {}                                       # (name, instance) -> lengths/extras
@@ -97,7 +97,7 @@ def main():
 
     names = sorted({n for n, _ in runs})
     lines = ["# Box-TSP 2D extension: results", "",
-             f"Raw runs: `results/box2/runs.csv` ({len(rows)} rows). Reference setting: "
+             f"Raw runs: `results/2d/box2/runs.csv` ({len(rows)} rows). Reference setting: "
              f"`{REF}`. \"vs ref\" = % longer than the reference on the same instance "
              "(negative = shorter), mean ± sample std dev over seeds. \"vs HK\" = % above "
              "the Held-Karp bound. Cleanup levels: none (box tour as merged), 2-opt, "
@@ -177,9 +177,9 @@ def main():
         print("curves:", [c for _, c in cur])
         print("merges:", [m for _, m in mer])
 
-    out = ROOT / "results" / "box2" / "summary.md"
+    out = ROOT / "results" / "2d" / "box2" / "summary.md"
     out.write_text("\n".join(lines), encoding="utf-8")
-    with open(ROOT / "results" / "box2" / "summary.csv", "w", newline="") as fh:
+    with open(ROOT / "results" / "2d" / "box2" / "summary.csv", "w", newline="") as fh:
         if csv_rows:
             w = csv.DictWriter(fh, fieldnames=list(csv_rows[0]))
             w.writeheader()

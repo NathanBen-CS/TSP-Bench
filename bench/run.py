@@ -130,6 +130,8 @@ def main():
     ap.add_argument("--config", default=None)
     ap.add_argument("--alg", help="comma-separated algorithm names (default: all)")
     ap.add_argument("--inst", help="comma-separated instance names (default: config)")
+    ap.add_argument("--core", type=int, default=0,
+                    help="CPU to pin to (timed runs: 0, with nothing else running)")
     ap.add_argument("--list", action="store_true",
                     help="print every run that would happen, then exit")
     args = ap.parse_args()
@@ -196,8 +198,8 @@ def main():
                               "timestamp": datetime.datetime.now().isoformat(timespec="seconds")})
 
     # ---- 2. run them, smallest instances first within each algorithm
-    pin_to_core0()
-    print(f"\nRunning {len(todo)} run(s), pinned to CPU 0.  Ctrl+C stops; "
+    pin_to_core0(args.core)
+    print(f"\nRunning {len(todo)} run(s), pinned to CPU {args.core}.  Ctrl+C stops; "
           "run again to resume.\n")
     counts = {}
     started = datetime.datetime.now()

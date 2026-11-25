@@ -1,6 +1,6 @@
-"""Pictures of every space-filling curve the box solver can follow.
+"""Pictures of every space-filling curve the box solver can follow, plus hull order.
 
-    py bench/plot_curves.py          # writes results/curves/<curve>.png and all_curves.png
+    py bench/plot_curves.py          # writes results/2d/curves/<curve>.png and all_curves.png
 
 For each curve, one PNG with three panels:
   1. the curve itself: a small grid of points visited in curve order
@@ -9,8 +9,10 @@ For each curve, one PNG with three panels:
 The line is shaded light to dark from start to end so the order can be
 followed; a closed curve's last step back to the start is drawn dashed.
 
-Every path comes from the real solver (solvers/boxtsp.exe --start curve
---curve NAME --cleanup none), so the pictures show exactly the order the
+Every path comes from the real solver (bin/boxtsp2d.exe --start curve
+--curve NAME --cleanup none; for hull, --start hull --cleanup none: the
+convex layers outermost first, each ring once round, entered at the city
+nearest the end of the ring before; see docs/hull_tsp.md), so the pictures show exactly the order the
 benchmark used; nothing is re-implemented here.  Following the naming used
 in the charts, a bare curve name means "that order only" (no boxes, no
 cleanup).
@@ -37,13 +39,14 @@ CURVES = [  # name, grid points per side for the picture of the curve, closed?, 
     ("peano",      27, False, "3 x 3 squares, 9 children per cell"),
     ("morton",     16, False, "Z-order: jumps between cells (negative control)"),
     ("strip",      16, False, "snake rows"),
+    ("hull",       16, False, "convex layers, outermost first (not a curve)"),
 ]
 INSTANCES = [("E1k.0", "1,000 uniform cities"), ("C1k.0", "1,000 clustered cities")]
 BOX_DIR = Path("C:/Users/Natha/tsp-instances-box")
 SURFACE, TEXT, MUTED = "#fcfcfb", "#0b0b0b", "#52514e"
 START, END = "#1baf7a", "#e34948"
 SHADE = LinearSegmentedColormap.from_list("progress", ["#b8d4f5", "#2a78d6", "#0d2f5c"])
-OUT = ROOT / "results" / "curves"
+OUT = ROOT / "results" / "2d" / "curves"
 
 
 def grid_instance(path, side, nudge):
@@ -69,8 +72,9 @@ def grid_instance(path, side, nudge):
 def curve_order(instance, curve, workdir):
     """Run the solver to get the curve's visiting order on an instance."""
     tour_file = Path(workdir) / f"{curve}.tour"
-    subprocess.run([str(ROOT / "solvers" / "boxtsp.exe"), str(instance), str(tour_file),
-                    "--start", "curve", "--curve", curve, "--cleanup", "none"],
+    start = ["--start", "hull"] if curve == "hull" else ["--start", "curve", "--curve", curve]
+    subprocess.run([str(ROOT / "bin" / "boxtsp2d.exe"), str(instance), str(tour_file),
+                    *start, "--cleanup", "none"],
                    check=True, capture_output=True)
     return tour_file
 
@@ -130,7 +134,7 @@ def main():
                          fontweight="bold", y=0.985)
             fig.text(0.03, 0.915, "Line shaded light to dark from start (green) to end (red). "
                      f"Dashed grey: the step back to the start{' (closed curve: the ends are neighbours)' if closed else ''}. "
-                     "Order from solvers/boxtsp.exe --start curve, no boxes, no cleanup.",
+                     f"Order from bin/boxtsp2d.exe --start {'hull' if name == 'hull' else 'curve'}, no boxes, no cleanup.",
                      color=MUTED, fontsize=9.5)
             fig.subplots_adjust(left=0.03, right=0.98, top=0.8, bottom=0.03, wspace=0.12)
             out = OUT / f"{name}.png"
@@ -144,16 +148,15 @@ def main():
         draw_path(ax, coords, tour, closed, lw=1.8, dots=0)
         ax.set_title(f"{name}{'  (closed)' if closed else ''}", loc="left", color=TEXT,
                      fontsize=12, fontweight="bold")
-    axes.flat[-1].axis("off")
-    axes.flat[-1].text(0.02, 0.6, "Light to dark: start (green) to end (red).\n"
-                       "Dashed grey: the step back to the start.\n\n"
-                       "Same grid sizes as the single pictures:\n16 x 16 for the square curves,\n"
-                       "27 x 27 for Peano, 32 x 32 for the\ntriangle curves (Sierpinski, Knopp),\n"
-                       "whose points are nudged slightly off\nthe exact grid (see the script).",
-                       transform=axes.flat[-1].transAxes, color=MUTED, fontsize=10.5, va="top")
-    fig.suptitle("Every curve the box solver can follow", x=0.03, ha="left", color=TEXT,
-                 fontsize=15, fontweight="bold", y=0.985)
-    fig.subplots_adjust(left=0.02, right=0.99, top=0.9, bottom=0.02, wspace=0.08, hspace=0.15)
+    fig.suptitle("Every curve the box solver can follow, and hull order", x=0.03, ha="left",
+                 color=TEXT, fontsize=15, fontweight="bold", y=0.985)
+    fig.text(0.03, 0.925, "Light to dark: start (green) to end (red). Dashed grey: the step back "
+             "to the start. Grids: 16 x 16 for the square curves and hull, 27 x 27 for Peano, "
+             "32 x 32 for the triangle curves (Sierpinski, Knopp),\nwhose points are nudged "
+             "slightly off the exact grid (see the script). Hull is not a curve: convex layers, "
+             "outermost first, each ring once round (docs/hull_tsp.md).",
+             color=MUTED, fontsize=10, va="top")
+    fig.subplots_adjust(left=0.02, right=0.99, top=0.85, bottom=0.02, wspace=0.08, hspace=0.15)
     fig.savefig(OUT / "all_curves.png", dpi=150, facecolor=SURFACE)
     print(f"Wrote {(OUT / 'all_curves.png').relative_to(ROOT)}")
 

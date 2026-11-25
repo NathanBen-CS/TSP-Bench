@@ -1,11 +1,11 @@
 """Chart: how the box size t affects the box method, alone and after cleanup.
 
-    py bench/plot_box_t.py                   # writes results/box_t_sweep.png
+    py bench/plot_box_t.py                   # writes results/2d/box_t_sweep.png
 
 Left panel: the box tour on its own (no cleanup).  Right panel: the same box
 tour after 2-opt + Or-opt.  One line per data type and size, t = 6, 8, 10, 12.
 
-Where the numbers come from (results/box/runs.csv):
+Where the numbers come from (results/2d/box/runs.csv):
   * right panel: the tour length of the full-method runs
     (boxes+2opt+oropt-t6, -t8, boxes+2opt+oropt (t = 10), -t12);
   * left panel: the same runs' start_length, the box tour before cleanup.
@@ -38,7 +38,7 @@ SURFACE, TEXT, MUTED, GRID, BAND = "#fcfcfb", "#0b0b0b", "#52514e", "#e6e5e0", "
 def main():
     bounds = load_bounds(ROOT / "refs" / "bounds")
     alone, cleaned = defaultdict(list), defaultdict(list)   # (type, n, t) -> [% above HK]
-    with open(ROOT / "results" / "box" / "runs.csv", newline="") as f:
+    with open(ROOT / "results" / "2d" / "box" / "runs.csv", newline="") as f:
         for r in csv.DictReader(f):
             t = T_RUNS.get(r["algorithm"])
             inst = r["instance"]
@@ -121,7 +121,7 @@ def main():
              + CODE_KEY + ".", color=MUTED, fontsize=9.5)
     fig.subplots_adjust(left=0.055, right=0.87, top=0.79, bottom=0.2, wspace=0.55)
 
-    out = ROOT / "results" / "box_t_sweep.png"
+    out = ROOT / "results" / "2d" / "box_t_sweep.png"
     fig.savefig(out, dpi=170, facecolor=SURFACE)
     print(f"Wrote {out}")
     for panel in ("alone", "cleaned"):

@@ -62,8 +62,8 @@ def _filetime_seconds(ft):
     return ((ft.dwHighDateTime << 32) | ft.dwLowDateTime) / 1e7   # 100 ns units
 
 
-def pin_to_core0():
-    if not _kernel32.SetProcessAffinityMask(_kernel32.GetCurrentProcess(), 1):
+def pin_to_core0(core=0):
+    if not _kernel32.SetProcessAffinityMask(_kernel32.GetCurrentProcess(), 1 << core):
         raise ctypes.WinError(ctypes.get_last_error())
 
 
@@ -141,13 +141,13 @@ def instance_name(path):
 
 
 def instance_is_geometric(path):
-    """True if the instance has coordinates (EUC_2D / CEIL_2D), not a matrix."""
+    """True if the instance has coordinates (EUC_2D, CEIL_2D, EUC_3D), not a matrix."""
     with open(path, "rb") as f:
         for _ in range(50):
             line = f.readline().decode("ascii", "replace")
             m = re.match(r"\s*EDGE_WEIGHT_TYPE\s*:?\s*(\S+)", line)
             if m:
-                return m.group(1) in ("EUC_2D", "CEIL_2D")
+                return m.group(1) in ("EUC_2D", "CEIL_2D", "EUC_3D")
     return False
 
 
@@ -220,6 +220,7 @@ def config_label(algorithm, level="full"):
         "twoopt": "greedy T R1",                  # bench twoopt: greedy start, one round
         "twoopt_or": "greedy TO R1",              # bench twoopt_or
         "greedy+2opt+oropt": "greedy TO Rn",      # cleanup repeated until clean
+        "greedy+2opt": "greedy T Rn",
         "hilbert-only": "hilbert",
         "boxes-only": "hilbert B M1 t=10",
         "boxes+2opt": "hilbert BT Rn M1 t=10",
@@ -230,9 +231,18 @@ def config_label(algorithm, level="full"):
     m = re.fullmatch(r"boxes\+2opt\+oropt-t(\d+)", algorithm)       # box experiment
     if m:
         return f"hilbert BTO Rn M1 t={m.group(1)}"
-    m = re.fullmatch(r"box:(\w+):(M\d):t(\d+)", algorithm)          # 2D extension
+    m = re.fullmatch(r"box:(\w+):(M\d):t(\d+)", algorithm)          # 2D extension, 3D
     if m:
         return f"{m.group(1)} B{stage} {m.group(2)} t={m.group(3)}"
+    m = re.fullmatch(r"(box|kd):(\w+):(M\d):t(\d+)(:k\d+)?(:T R1|:TO R1)?", algorithm)   # 3D
+    if m:
+        box = "kd-B" if m.group(1) == "kd" else "B"
+        st = m.group(6)[1:] if m.group(6) else stage
+        return (f"{m.group(2)} {box}{st} {m.group(3)} t={m.group(4)}"
+                + (f" K={m.group(5)[2:]}" if m.group(5) else ""))
+    m = re.fullmatch(r"greedy TO Rn:k(\d+)", algorithm)
+    if m:
+        return f"greedy TO Rn K={m.group(1)}"
     if algorithm.startswith("curve:"):
         return algorithm[6:]
     return algorithm

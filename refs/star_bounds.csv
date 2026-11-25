@@ -1,0 +1,9 @@
+instance,file,n,best_tour,lower_bound,optimal,tour_file,tour_url,bound_url,published_parsecs
+star100,star100.tsp,100,1795,1795,yes,star100.tour,https://math.uwaterloo.ca/tsp/star/star100_tour.html,https://math.uwaterloo.ca/tsp/star/star100.html,tour 179.5 (optimal)
+star1k,star1k.tsp,1000,22227,22227,yes,star1k.tour,https://math.uwaterloo.ca/tsp/star/star1k_tour.html,https://math.uwaterloo.ca/tsp/star/star1k.html,tour 2222.7 (optimal)
+star10k,star10k.tsp,10000,276750,276750,yes,star10k.tour,https://math.uwaterloo.ca/tsp/star/star10k_tour.html,https://math.uwaterloo.ca/tsp/star/star10k.html,tour 27675.0 (optimal)
+kj37859,kj37859.tsp,37859,28235453,28235453,yes,kj37859.tour,https://math.uwaterloo.ca/tsp/star/kj37859_tour.html,https://math.uwaterloo.ca/tsp/star/kj37859.html,"tour 2,823,545.3 (optimal)"
+hyg109399,hyg109399.tsp,109399,13750874,13750874,yes,hyg109399.tour,https://math.uwaterloo.ca/tsp/star/hyg_tour.html,https://math.uwaterloo.ca/tsp/star/hyg.html,"tour 1,375,087.4 (optimal)"
+hyg119614,hyg119614.tsp,119614,253077734,253077734,yes,hyg119614.tour,https://math.uwaterloo.ca/tsp/star/hyg119614_tour.html,https://math.uwaterloo.ca/tsp/star/hyg119614.html,"tour 25,307,773.4 (optimal)"
+star250k,star250k.tsp,250000,9794191,9794149,no,star250k.9794191.tour,https://math.uwaterloo.ca/tsp/star/star250k_tour.html,https://math.uwaterloo.ca/tsp/star/star250k.html,tour 979419.1; LP bound 979414.0; branch-and-bound bound 979414.9
+gaia1,gaia2079471.tsp,2079471,288843524,288841390,no,gaia2079471.288843524.tour,https://math.uwaterloo.ca/tsp/star/gaia1_tour.html,https://math.uwaterloo.ca/tsp/star/gaia1.html,"tour 28,884,352.4; bound 28,884,139.0"

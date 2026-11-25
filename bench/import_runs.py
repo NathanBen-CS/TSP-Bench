@@ -6,7 +6,7 @@ renamed) from a source results CSV into a target one, for instances the
 target's config actually uses, skipping any (algorithm, instance, seed)
 the target already has.  bench/run.py then only runs what is missing.
 
-    py bench/import_runs.py --from results/box/runs.csv --to-config bench/config.json \
+    py bench/import_runs.py --from results/2d/box/runs.csv --to-config bench/config.json \
         --alg "greedy+2opt+oropt" --alg "boxes+2opt+oropt=box:hilbert:M1:t10"
 
 Each --alg is NAME or SOURCE_NAME=TARGET_NAME.  Imported rows keep their

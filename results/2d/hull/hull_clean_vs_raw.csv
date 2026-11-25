@@ -1,0 +1,77 @@
+kind,size,n,line,setting,maps,clean_mean,clean_sd,raw_mean,raw_sd
+uniform,1k,1000,hilbert,box:hilbert:M2:t10,3,7.4154,0.8444,27.4499,1.212
+uniform,1k,1000,moore,box:moore:M1:t10,3,8.0903,0.32,23.8874,1.6001
+uniform,1k,1000,sierpinski,box:sierpinski:M2:t10,3,7.0277,0.6169,31.7212,3.0958
+uniform,1k,1000,knopp,box:knopp:M2:t10,3,7.2556,0.6949,33.6988,5.5339
+uniform,1k,1000,peano,box:peano:M1:t10,3,7.2484,1.089,36.7061,1.4452
+uniform,1k,1000,morton,box:morton:M2:t10,3,6.1495,0.262,68.4359,3.5314
+uniform,1k,1000,strip,box:strip:M1:t10,3,6.1705,0.865,799.2589,8.6569
+uniform,1k,1000,hull,hull:M1,3,6.1967,0.5836,329.4217,9.6915
+uniform,1k,1000,greedy,greedy+2opt+oropt,3,4.0517,1.2228,17.1551,2.6537
+uniform,1k,1000,Hilbert order,curve:hilbert,3,,,38.2817,1.4266
+uniform,1k,1000,hull order,curve:hull,3,,,334.3216,6.9118
+uniform,10k,10000,hilbert,box:hilbert:M4:t10,3,8.2325,0.4318,15.9078,0.3078
+uniform,10k,10000,moore,box:moore:M4:t10,3,8.2139,0.4086,15.9078,0.3078
+uniform,10k,10000,sierpinski,box:sierpinski:M4:t10,3,7.5556,0.2587,20.1658,0.4226
+uniform,10k,10000,knopp,box:knopp:M4:t10,3,7.6335,0.2564,20.1658,0.4226
+uniform,10k,10000,peano,box:peano:M4:t10,3,8.4271,0.2307,16.8699,0.3633
+uniform,10k,10000,morton,box:morton:M2:t10,3,7.5536,0.2917,67.0423,0.8629
+uniform,10k,10000,strip,box:strip:M2:t10,3,7.0441,0.1989,2371.3501,11.3089
+uniform,10k,10000,hull,hull:M1,3,7.5219,0.3062,558.7177,2.3908
+uniform,10k,10000,greedy,greedy+2opt+oropt,3,4.2048,0.2521,16.3723,0.8703
+uniform,10k,10000,Hilbert order,curve:hilbert,3,,,38.6443,0.7033
+uniform,10k,10000,hull order,curve:hull,3,,,562.3669,2.5092
+uniform,100k,100000,hilbert,box:hilbert:M1:t10,2,8.3405,0.076,28.263,0.1864
+uniform,100k,100000,moore,box:moore:M1:t10,2,8.3861,0.0706,27.7891,0.0355
+uniform,100k,100000,sierpinski,box:sierpinski:M4:t10,2,7.7099,0.0086,19.8861,0.1059
+uniform,100k,100000,knopp,box:knopp:M4:t10,2,7.7368,0.023,19.8856,0.1067
+uniform,100k,100000,peano,box:peano:M4:t10,2,8.5886,0.0265,17.1722,0.0459
+uniform,100k,100000,morton,box:morton:M1:t10,2,7.677,0.0386,67.78,0.0408
+uniform,100k,100000,strip,box:strip:M1:t10,2,6.6883,0.1286,8041.5158,12.5101
+uniform,100k,100000,hull,hull:M1,2,7.6319,0.0878,882.8646,0.2221
+uniform,100k,100000,greedy,greedy+2opt+oropt,2,4.1758,0.2913,15.0513,0.1314
+uniform,100k,100000,Hilbert order,curve:hilbert,2,,,38.5524,0.0147
+uniform,100k,100000,hull order,curve:hull,2,,,885.929,1.1646
+uniform,1M,1000000,hilbert,box:hilbert:M4:t10,1,8.5987,,16.7608,
+uniform,1M,1000000,moore,box:moore:M4:t10,1,8.5857,,16.7605,
+uniform,1M,1000000,sierpinski,box:sierpinski:M4:t10,1,7.8538,,20.0622,
+uniform,1M,1000000,knopp,box:knopp:M4:t10,1,7.8543,,20.0619,
+uniform,1M,1000000,peano,box:peano:M4:t10,1,8.7097,,17.3651,
+uniform,1M,1000000,morton,box:morton:M2:t10,1,7.9785,,74.1028,
+uniform,1M,1000000,hull,hull:M1,1,19.7763,,1351.2013,
+uniform,1M,1000000,greedy,greedy+2opt+oropt,1,4.7622,,14.255,
+uniform,1M,1000000,Hilbert order,curve:hilbert,1,,,38.2581,
+uniform,1M,1000000,hull order,curve:hull,1,,,1353.0342,
+clustered,1k,1000,hilbert,box:hilbert:M2:t10,3,11.2889,3.7748,39.2439,1.9716
+clustered,1k,1000,moore,box:moore:M2:t10,3,9.8428,3.3215,31.8453,2.6107
+clustered,1k,1000,sierpinski,box:sierpinski:M2:t10,3,8.1243,0.6742,32.363,1.6314
+clustered,1k,1000,knopp,box:knopp:M2:t10,3,6.9091,1.0177,33.3544,2.3042
+clustered,1k,1000,peano,box:peano:M5:t10,3,10.4994,2.2303,25.5854,1.8978
+clustered,1k,1000,morton,box:morton:M5:t10,3,12.5035,2.682,30.6768,5.2554
+clustered,1k,1000,strip,box:strip:M5:t10,3,13.1831,2.437,333.2375,99.3015
+clustered,1k,1000,hull,hull:M2,3,9.6498,1.6323,665.3284,87.2708
+clustered,1k,1000,greedy,greedy+2opt+oropt,3,5.3518,0.6725,17.2624,0.4206
+clustered,1k,1000,Hilbert order,curve:hilbert,3,,,50.136,2.326
+clustered,1k,1000,hull order,curve:hull,3,,,884.2088,112.7399
+clustered,10k,10000,hilbert,box:hilbert:M5:t10,3,13.6838,1.3513,28.7836,1.5593
+clustered,10k,10000,moore,box:moore:M1:t10,3,14.4459,1.6497,42.568,2.5375
+clustered,10k,10000,sierpinski,box:sierpinski:M1:t10,3,14.2044,2.0919,46.6527,4.3134
+clustered,10k,10000,knopp,box:knopp:M1:t10,3,14.0801,1.9844,49.3956,3.4206
+clustered,10k,10000,peano,box:peano:M5:t10,3,14.1361,1.2409,30.1887,1.205
+clustered,10k,10000,morton,box:morton:M5:t10,3,16.0057,3.354,32.1407,4.4024
+clustered,10k,10000,strip,box:strip:M4:t10,3,29.8726,3.8219,1045.6095,59.1065
+clustered,10k,10000,hull,hull:M4,3,22.6476,2.4769,1255.1146,42.5194
+clustered,10k,10000,greedy,greedy+2opt+oropt,3,9.164,1.2463,21.1446,1.5413
+clustered,10k,10000,Hilbert order,curve:hilbert,3,,,55.547,2.9358
+clustered,10k,10000,hull order,curve:hull,3,,,1717.5698,27.7194
+clustered,100k,100000,hilbert,box:hilbert:M5:t10,2,14.4548,0.1656,29.6222,0.0088
+clustered,100k,100000,moore,box:moore:M5:t10,2,14.4019,0.0171,29.7297,0.2331
+clustered,100k,100000,sierpinski,box:sierpinski:M5:t10,2,14.2205,0.1717,32.0089,0.377
+clustered,100k,100000,knopp,box:knopp:M5:t10,2,14.1984,0.1634,32.0089,0.377
+clustered,100k,100000,peano,box:peano:M5:t10,2,14.499,0.0176,31.0017,0.0935
+clustered,100k,100000,morton,box:morton:M5:t10,2,15.5685,0.3842,31.6372,0.3711
+clustered,100k,100000,strip,box:strip:M4:t10,2,47.4222,0.2379,5486.8373,19.3741
+clustered,100k,100000,hull,hull:M3,2,30.6859,0.5199,2555.093,5.751
+clustered,100k,100000,greedy,greedy+2opt+oropt,2,9.5084,0.7285,21.0578,0.5615
+clustered,100k,100000,Hilbert order,curve:hilbert,2,,,55.8065,0.0295
+clustered,100k,100000,hull order,curve:hull,2,,,2977.1357,21.0718

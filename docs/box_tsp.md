@@ -10,8 +10,8 @@ But it is **worse than the same cleanup started from a greedy tour**, by about
 3–4% on uniform data and about 3–8% on clustered data, and it is not faster. The
 box size *t* has almost no effect after cleanup.
 
-Full tables: [`results/box/summary.md`](../results/box/summary.md) ·
-raw runs: `results/box/runs.csv` · summary numbers: `results/box/summary.csv`.
+Full tables: [`results/2d/box/summary.md`](../results/2d/box/summary.md) ·
+raw runs: `results/2d/box/runs.csv` · summary numbers: `results/2d/box/summary.csv`.
 
 ---
 
@@ -35,13 +35,13 @@ distances, the bench's neighbour lists and cleanup, and K = 16.
 
 | Piece | Where | Notes |
 |---|---|---|
-| Hilbert sort on a 2²⁰ grid | `solvers/hilbert.c` (`hilbertSort`) | factored out of the existing code; `spacefill` gives byte-identical tours |
-| Quadtree boxes | `solvers/boxes.c` (`boxSplit`) | boxes = contiguous runs of the sorted list, as in `proto.c`; depth cap 20 |
+| Hilbert sort on a 2²⁰ grid | `solvers/d2/hilbert.c` (`hilbertSort`) | factored out of the existing code; `spacefill` gives byte-identical tours |
+| Quadtree boxes | `solvers/common/boxes.c` (`boxSplit`) | boxes = contiguous runs of the sorted list, as in `proto.c`; depth cap 20 |
 | Exact loop per box | `boxes.c` (`heldKarpLoop`) | Held-Karp, table 2^(t−1) × (t−1); t ≤ 12 |
 | Glue | `boxes.c` (`boxTour`) | the `proto.c` method; records G and the sum of the box loops separately |
-| Cleanup | `solvers/localsearch.c` (`localSearchToOptimum`) | the bench's 2-opt / Or-opt, repeated until a whole round with every city re-examined finds nothing |
-| Solver and variants | `solvers/boxtsp.c` | one program; `--start`, `--cleanup`, `--t`, `--k` |
-| Tests | `solvers/boxtest.c` | 33 tests, all pass |
+| Cleanup | `solvers/common/localsearch.c` (`localSearchToOptimum`) | the bench's 2-opt / Or-opt, repeated until a whole round with every city re-examined finds nothing |
+| Solver and variants | `solvers/d2/boxtsp.c` | one program; `--start`, `--cleanup`, `--t`, `--k` |
+| Tests | `tests/boxtest2d.c` | 33 tests, all pass |
 | Data | `bench/box_instances.py`, `bench/check_clumpiness.py` | 38 instances; the clumpiness test passes |
 | Experiment | `bench/box_config.json`, `bench/box_report.py` | 13 algorithms × 38 instances |
 | Validator | `bench/run.py` | new `MISMATCH` status when the solver's own `tour_cost` ≠ `length.exe` |
@@ -51,7 +51,7 @@ distances, the bench's neighbour lists and cleanup, and K = 16.
 - **Depth-capped boxes:** a box at the depth cap with more than t cities keeps its curve order. In `proto.c` it would overflow the DP table. It never happened on the experiment data, only in the duplicate-point tests.
 - **Stronger 2-opt:** best move per city, 16 neighbours, rounds until clean.
 
-## 3. Tests (Task 2): `solvers/boxtest.exe`, 33 / 33 pass
+## 3. Tests (Task 2): `bin/boxtest2d.exe`, 33 / 33 pass
 
 - **Hilbert:** on a 16×16 grid, consecutive curve positions are neighbouring cells; the 2×2 order is (0,0), (0,1), (1,1), (1,0).
 - **Boxes:** uniform, clustered and duplicate-heavy data, t = 6, 8, 10, 12. Every city is in exactly one box. Every box is ≤ t, except depth-capped boxes, which are checked to hold only cities in the same grid cell.
@@ -219,8 +219,8 @@ are inside its own cluster. At 1k clustered the difference to the baseline (+2.9
 
 ```powershell
 $env:PATH = "C:\msys64\ucrt64\bin;C:\msys64\usr\bin;" + $env:PATH
-cd solvers; make; .\boxtest.exe; cd ..             # build + 33 tests
+cd solvers; make; cd ..; .\bin\boxtest2d.exe             # build + 33 tests
 py bench\box_instances.py                           # data + clumpiness check
 py bench\run.py --config bench\box_config.json      # ~30 min, resumable
-py bench\box_report.py                              # results/box/summary.md
+py bench\box_report.py                              # results/2d/box/summary.md
 ```

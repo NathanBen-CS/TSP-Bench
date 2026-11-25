@@ -7,6 +7,14 @@ at whatever level you need.
 
 You don't need to know C to follow it. Code is quoted only where it helps.
 
+**Where the code is:** `common/` holds everything that only needs `distance()` and the
+neighbour lists; it is compiled once and linked into both the 2D and the 3D
+programs. `d2/` and `d3/` hold the parts that need coordinates (reader, neighbour
+search, curves) and the programs that differ. `make` in this folder builds all of
+it into `bin/`, with a `2d` or `3d` suffix (`twoopt` below is `bin/twoopt2d.exe`,
+and so on). This README describes the 2D programs; the 3D differences are in
+[`docs/box_tsp_3d.md`](../docs/box_tsp_3d.md).
+
 ---
 
 ## Contents
@@ -47,7 +55,7 @@ The strong solvers do both: build a decent tour quickly, then polish it.
 
 ## 2. How a tour is stored
 
-> Files: `tour.h`, `tour.c`
+> Files: `common/tour.h`, `common/tour.c`
 
 ### The simple version
 
@@ -127,7 +135,7 @@ Construction costs more than improvement, which surprises most people. Section
 
 ## 4. Space-filling curve (`spacefill`)
 
-> Files: `spacefill.c`, `hilbert.c`
+> Files: `d2/spacefill.c`, `d2/hilbert.c`
 
 ### The idea
 
@@ -216,7 +224,7 @@ list distances, so `spacefill` refuses them, and the benchmark marks those runs
 
 ## 5. Neighbour lists: only look nearby
 
-> File: `neighbors.c`
+> File: `d2/neighbors2d.c` (the 3D version is `d3/neighbors3d.c`)
 
 ### The idea
 
@@ -279,7 +287,7 @@ in the testbed have at most 10,000 cities.
 
 ## 6. Greedy start tour
 
-> File: `greedystart.c`
+> File: `common/greedystart.c`
 
 ### The idea
 
@@ -358,7 +366,7 @@ lengths, and is often slightly shorter.
 
 ## 7. 2-opt (`twoopt`)
 
-> File: `localsearch.c` (the moves), `tour.c` (`exchange2`, `reversePath`)
+> File: `common/localsearch.c` (the moves), `common/tour.c` (`exchange2`, `reversePath`)
 
 ### The idea
 
@@ -460,7 +468,7 @@ this kind of move can't improve.
 
 ## 8. Or-opt (`twoopt_or`)
 
-> File: `localsearch.c` (`orOptMove`)
+> File: `common/localsearch.c` (`orOptMove`)
 
 ### The idea
 
@@ -621,7 +629,7 @@ two.
 
 **Benchmark fairness:** the DIMACS rules require the same settings on every
 instance. Changing a setting mid-benchmark makes earlier rows incomparable. If
-you change one, either delete that solver's rows from `results/runs.csv` or give
+you change one, either delete that solver's rows from `results/2d/runs.csv` or give
 the new version a new name in `bench/config.json` (for example `twoopt_k20`).
 
 ---

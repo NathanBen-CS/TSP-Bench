@@ -1,13 +1,15 @@
-"""Charts for the 2D box extension (results/box2/runs.csv).
+"""Charts for the 2D box extension (results/2d/box2/runs.csv).
 
     py bench/box2_charts.py
 
-Writes four PNGs to results/box2/:
+Writes six PNGs to results/2d/box2/:
   box2_overview.png             every solver and the box finalists, % above the
                                 Held-Karp bound, at 10k and 100k cities
   box2_t_sweep.png              final result vs the reference for each t, per
                                 curve and merge, uniform and clustered
   box2_clustered_vs_uniform.png each solver's loss on clustered data (10k)
+  box2_raw_clustered_vs_uniform.png  the same with no cleanup: greedy, plain
+                                curve orders and boxes only (B), every merge
   box2_curve_merge.png          curve x merge grid at t = 10, after full
                                 cleanup and before any cleanup
 Gaps use the Held-Karp bound (refs/bounds): all 10k seeds have one, 2 of
@@ -29,7 +31,7 @@ from common import CODE_KEY, ROOT, config_label, load_bounds
 SURFACE, TEXT, MUTED, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e6e5e0"
 UNIFORM, CLUSTERED = "#2a78d6", "#eb6834"
 REF = "box:hilbert:M1:t10"
-OUT = ROOT / "results" / "box2"
+OUT = ROOT / "results" / "2d" / "box2"
 CURVES = ["hilbert", "moore", "sierpinski", "knopp", "peano", "morton", "strip"]
 MERGES = ["M1", "M2", "M3", "M4", "M5"]
 FINALISTS = ["box:knopp:M1:t10", "box:sierpinski:M1:t10", "box:sierpinski:M2:t12",
@@ -211,6 +213,54 @@ def clustered_vs_uniform(bounds, L):
     fig.savefig(OUT / "box2_clustered_vs_uniform.png", dpi=170, facecolor=SURFACE)
 
 
+def raw_clustered_vs_uniform(bounds, L):
+    """No cleanup at all: greedy, each curve's plain order, and that curve's
+    boxes (B) with every merge at t = 10, uniform vs clustered, 10k cities."""
+    curves = [c for c in CURVES if c != "strip"]           # strip is off the scale
+    rows = [("greedy", "full")]
+    for c in curves:
+        rows += [None, (f"curve:{c}", "full")] + [(f"box:{c}:{m}:t10", "none") for m in MERGES]
+    u_i, c_i = insts(L, "uniform", "10k"), insts(L, "clustered", "10k")
+    fig, ax = plt.subplots(figsize=(12.5, 13), facecolor=SURFACE)
+    clean(ax)
+    ypos, labels, y = [], [], 0
+    for r in rows:
+        if r is None:
+            y += 0.6
+            continue
+        name, lvl = r
+        u, c = hk_gap(L, bounds, name, u_i, lvl), hk_gap(L, bounds, name, c_i, lvl)
+        ax.plot([u, c], [y, y], color=GRID, lw=5, solid_capstyle="round", zorder=1)
+        ax.scatter([u], [y], s=70, color=UNIFORM, zorder=3, edgecolor=SURFACE, linewidth=1.5)
+        ax.scatter([c], [y], s=70, color=CLUSTERED, zorder=3, edgecolor=SURFACE, linewidth=1.5)
+        ax.annotate(f"{c - u:+.1f} pts", xy=(max(u, c), y), xytext=(9, 0), textcoords="offset points",
+                    va="center", fontsize=9.5, fontweight="bold", color=TEXT)
+        ypos.append(y); labels.append(config_label(name, lvl)); y += 1
+    for kind, col in (("uniform", UNIFORM), ("clustered", CLUSTERED)):
+        g = hk_gap(L, bounds, "greedy", insts(L, kind, "10k"))
+        ax.axvline(g, color=col, lw=1, ls=(0, (4, 3)), zorder=0)
+        left = kind == "uniform"                          # labels either side of the two lines
+        ax.text(g - 0.8 if left else g + 0.8, y - 0.2, f"greedy, {kind}\n{g:.1f}%", color=col,
+                fontsize=8.5, va="top", ha="right" if left else "left")
+    ax.set_yticks(ypos, labels)
+    for lbl in ax.get_yticklabels():
+        lbl.set_color(TEXT)
+    ax.set_ylim(y + 1.6, -0.8)
+    ax.set_xlim(0, 125)
+    ax.set_xlabel("% above Held-Karp bound (lower is better)")
+    fig.legend(handles=[plt.Line2D([], [], marker="o", ls="", ms=8, color=UNIFORM, label="uniform"),
+                        plt.Line2D([], [], marker="o", ls="", ms=8, color=CLUSTERED, label="clustered"),
+                        plt.Line2D([], [], ls="", label="label = clustered minus uniform")],
+               loc="lower left", bbox_to_anchor=(0.2, 0.0), ncol=3, frameon=False, labelcolor=TEXT)
+    fig.suptitle("No cleanup: raw greedy, raw curve orders and raw boxes, clustered vs uniform (10k)",
+                 x=0.03, ha="left", color=TEXT, fontsize=14, fontweight="bold", y=0.99)
+    fig.text(0.03, 0.965, "No 2-opt, no Or-opt. Each curve: its plain order, then its boxes (B) with each "
+             "merge, all t = 10. Mean % above the Held-Karp bound, 3 seeds per type.\nStrip is off the "
+             "scale (1,000–7,000%) and left out.\n" + CODE_KEY + ".", color=MUTED, fontsize=9.5, va="top")
+    fig.subplots_adjust(left=0.2, right=0.97, top=0.915, bottom=0.06)
+    fig.savefig(OUT / "box2_raw_clustered_vs_uniform.png", dpi=170, facecolor=SURFACE)
+
+
 def curve_merge(L):
     fig, axes = plt.subplots(2, 2, figsize=(14, 10), facecolor=SURFACE)
     for row, lvl in enumerate(["full", "none"]):
@@ -322,6 +372,7 @@ def main():
     curve_merge(L)
     t_sweep(L)
     clustered_vs_uniform(bounds, L)
+    raw_clustered_vs_uniform(bounds, L)
     overview(bounds, L)
     print("Wrote", ", ".join(p.name for p in sorted(OUT.glob("box2_*.png"))))
 

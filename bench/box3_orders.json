@@ -1,0 +1,159 @@
+{
+ "instance_dir": "data3d/instances",
+ "bounds_file": "refs/bounds3d",
+ "length_exe": "bin/length3d.exe",
+ "results_csv": "results/3d/runs.csv",
+ "instances": [
+  "E3d1k.0",
+  "E3d1k.1",
+  "E3d1k.2",
+  "C3d1k.0",
+  "C3d1k.1",
+  "C3d1k.2",
+  "CT3d1k.0",
+  "CT3d1k.1",
+  "CT3d1k.2",
+  "E3d10k.0",
+  "E3d10k.1",
+  "E3d10k.2",
+  "C3d10k.0",
+  "C3d10k.1",
+  "C3d10k.2",
+  "CT3d10k.0",
+  "CT3d10k.1",
+  "CT3d10k.2",
+  "E3d100k.0",
+  "E3d100k.1",
+  "E3d100k.2",
+  "C3d100k.0",
+  "C3d100k.1",
+  "C3d100k.2",
+  "CT3d100k.0",
+  "CT3d100k.1",
+  "CT3d100k.2",
+  "E3d1M.0",
+  "C3d1M.0",
+  "CT3d1M.0",
+  "star100",
+  "star1k",
+  "star10k",
+  "kj37859",
+  "hyg109399",
+  "hyg119614",
+  "star250k",
+  "gaia1"
+ ],
+ "algorithms": [
+  {
+   "name": "curve:hilbert3",
+   "exe": "bin/boxtsp3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600,
+   "args": [
+    "--start",
+    "curve",
+    "--curve",
+    "hilbert3",
+    "--cleanup",
+    "none"
+   ]
+  },
+  {
+   "name": "curve:morton3",
+   "exe": "bin/boxtsp3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600,
+   "args": [
+    "--start",
+    "curve",
+    "--curve",
+    "morton3",
+    "--cleanup",
+    "none"
+   ]
+  },
+  {
+   "name": "curve:peano3",
+   "exe": "bin/boxtsp3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600,
+   "args": [
+    "--start",
+    "curve",
+    "--curve",
+    "peano3",
+    "--cleanup",
+    "none"
+   ]
+  },
+  {
+   "name": "curve:snake3",
+   "exe": "bin/boxtsp3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600,
+   "args": [
+    "--start",
+    "curve",
+    "--curve",
+    "snake3",
+    "--cleanup",
+    "none"
+   ]
+  },
+  {
+   "name": "curve:moore3",
+   "exe": "bin/boxtsp3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600,
+   "args": [
+    "--start",
+    "curve",
+    "--curve",
+    "moore3",
+    "--cleanup",
+    "none"
+   ]
+  },
+  {
+   "name": "curve:sierpinski3",
+   "exe": "bin/boxtsp3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 10000000,
+   "timeout_s": 3600,
+   "args": [
+    "--start",
+    "curve",
+    "--curve",
+    "sierpinski3",
+    "--cleanup",
+    "none"
+   ]
+  },
+  {
+   "name": "nn",
+   "exe": "bin/nn3d.exe",
+   "randomized": false,
+   "seeds": [],
+   "geometric_only": true,
+   "max_n": 40000,
+   "timeout_s": 3600
+  }
+ ]
+}

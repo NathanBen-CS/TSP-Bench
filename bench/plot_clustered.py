@@ -1,6 +1,6 @@
 """Chart: how much worse each solver does on clustered data than on uniform data.
 
-    py bench/plot_clustered.py               # writes results/clustered_vs_uniform.png
+    py bench/plot_clustered.py               # writes results/2d/clustered_vs_uniform.png
 
 Both data types are measured against the same reference, the Held-Karp lower
 bound from refs/bounds, so the two dots of a row are directly comparable.
@@ -31,7 +31,7 @@ SURFACE, TEXT, MUTED, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e6e5e0"
 def main():
     bounds = load_bounds(ROOT / "refs" / "bounds")
     gaps = defaultdict(list)                  # (solver, type, n) -> [% above HK]
-    with open(ROOT / "results" / "box" / "runs.csv", newline="") as f:
+    with open(ROOT / "results" / "2d" / "box" / "runs.csv", newline="") as f:
         for r in csv.DictReader(f):
             inst = r["instance"]
             if r["status"] != "OK" or inst[0] not in "EC" or inst not in bounds:
@@ -93,7 +93,7 @@ def main():
              + CODE_KEY + ".", color=MUTED, fontsize=9.5)
     fig.subplots_adjust(left=0.15, right=0.975, top=0.78, bottom=0.2, wspace=0.18)
 
-    out = ROOT / "results" / "clustered_vs_uniform.png"
+    out = ROOT / "results" / "2d" / "clustered_vs_uniform.png"
     fig.savefig(out, dpi=170, facecolor=SURFACE)
     print(f"Wrote {out}")
     for key, name in SOLVERS:

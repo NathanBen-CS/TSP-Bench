@@ -1,10 +1,10 @@
 """Summarise the box-TSP experiment (Box-TSP plan, Task 4).
 
-Reads the raw runs (results/box/runs.csv, written by bench/run.py with
+Reads the raw runs (results/2d/box/runs.csv, written by bench/run.py with
 bench/box_config.json) and writes
 
-    results/box/summary.md    tables: mean and spread (sample std dev) over seeds
-    results/box/summary.csv   the same numbers, one row per algorithm/type/size
+    results/2d/box/summary.md    tables: mean and spread (sample std dev) over seeds
+    results/2d/box/summary.csv   the same numbers, one row per algorithm/type/size
 
 References for the gap columns:
   uniform    0.7124 * sqrt(N * A), A = 10^12 (the generator's square).  This

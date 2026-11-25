@@ -2,7 +2,7 @@
 
 Each stage is an ordinary bench/run.py config, so runs are resumable and
 every tour is checked by codes/length.exe.  All stages write to the same
-results file, results/box2/runs.csv; a setting that appears in two stages
+results file, results/2d/box2/runs.csv; a setting that appears in two stages
 has the same name and is only run once.
 
 Every box run uses the full cleanup (2-opt, then 2-opt + Or-opt).  The run
@@ -40,10 +40,10 @@ KEY_CURVES = ["sierpinski", "moore"]
 
 EXISTING = [
     {"name": "greedy",    "exe": "codes/greedy.exe"},
-    {"name": "nn",        "exe": "solvers/nn.exe", "max_n": 320000},
-    {"name": "spacefill", "exe": "solvers/spacefill.exe"},
-    {"name": "twoopt",    "exe": "solvers/twoopt.exe"},
-    {"name": "twoopt_or", "exe": "solvers/twoopt_or.exe"},
+    {"name": "nn",        "exe": "bin/nn2d.exe", "max_n": 320000},
+    {"name": "spacefill", "exe": "bin/spacefill2d.exe"},
+    {"name": "twoopt",    "exe": "bin/twoopt2d.exe"},
+    {"name": "twoopt_or", "exe": "bin/twoopt_or2d.exe"},
 ]
 
 
@@ -56,7 +56,7 @@ def entry(name, exe, args=None, max_n=10000000):
 
 
 def box(curve, merge, t):
-    return entry(f"box:{curve}:{merge}:t{t}", "solvers/boxtsp.exe",
+    return entry(f"box:{curve}:{merge}:t{t}", "bin/boxtsp2d.exe",
                  ["--start", "boxes", "--curve", curve, "--merge", merge,
                   "--t", str(t), "--cleanup", "oropt"])
 
@@ -64,9 +64,9 @@ def box(curve, merge, t):
 def baselines(curves, skip=()):
     algs = [entry(e["name"], e["exe"], max_n=e.get("max_n", 10000000))
             for e in EXISTING if e["name"] not in skip]
-    algs.append(entry("greedy+2opt+oropt", "solvers/boxtsp.exe",
+    algs.append(entry("greedy+2opt+oropt", "bin/boxtsp2d.exe",
                       ["--start", "greedy", "--cleanup", "oropt"]))
-    algs += [entry(f"curve:{c}", "solvers/boxtsp.exe",
+    algs += [entry(f"curve:{c}", "bin/boxtsp2d.exe",
                    ["--start", "curve", "--curve", c, "--cleanup", "none"]) for c in curves]
     return algs
 
@@ -76,7 +76,7 @@ def write(stage, sizes, algs):
         "instance_dir": "C:/Users/Natha/tsp-instances-box",
         "bounds_file": "refs/bounds",
         "length_exe": "codes/length.exe",
-        "results_csv": "results/box2/runs.csv",
+        "results_csv": "results/2d/box2/runs.csv",
         "instances": [f"{p}{size}.{s}" for size in sizes for p in "EC" for s in SEEDS[size]],
         "algorithms": algs,
     }

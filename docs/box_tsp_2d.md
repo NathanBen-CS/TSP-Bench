@@ -22,15 +22,15 @@ B = boxes (exact loops + merge); T = 2-opt; O = Or-opt; **R1** = one round of
 cleanup, **Rn** = rounds repeated until nothing improves (section 2, "R1 vs Rn").
 For example `greedy TO R1` (the bench's `twoopt_or`), `greedy TO Rn`, `sierpinski BTO Rn M5 t=4`.
 
-Raw runs: `results/box2/runs.csv` (878 runs after Stage D, all OK). Full tables:
-[`results/box2/summary.md`](../results/box2/summary.md). Charts:
-`results/box2/box2_*.png`.
+Raw runs: `results/2d/box2/runs.csv` (878 runs after Stage D, all OK). Full tables:
+[`results/2d/box2/summary.md`](../results/2d/box2/summary.md). Charts:
+`results/2d/box2/box2_*.png`.
 
 ---
 
 ## 1. What was built
 
-**Curves** (`solvers/curves.c`): every curve gives each city a key, and a box is
+**Curves** (`solvers/d2/curves2d.c`): every curve gives each city a key, and a box is
 one curve cell, meaning all keys that share a prefix in the curve's base. So a
 box is always one unbroken run of the sorted list.
 
@@ -47,7 +47,7 @@ box is always one unbroken run of the sorted list.
 | H-index | **not built** | | | | optional in the plan |
 | Gosper, Dragon | **excluded** (per plan) | | | | can't tile a square / not one-to-one |
 
-**Merges** (`solvers/merges.c`). The shared move: remove one edge from each of
+**Merges** (`solvers/common/merges.c`). The shared move: remove one edge from each of
 two loops, add two edges between them, and take the cheaper of the two ways to
 reconnect.
 
@@ -68,7 +68,7 @@ unchanged (24 of 24).
 
 This is exactly what `boxtsp --cleanup oropt` does after the start tour is built,
 for **every** start: B, greedy or a plain curve order. The code is in
-`solvers/localsearch.c`. Every BT and BTO number in this report comes from it.
+`solvers/common/localsearch.c`. Every BT and BTO number in this report comes from it.
 
 ### What both moves share
 
@@ -215,7 +215,7 @@ The box settings have no R1 version: `boxtsp` always runs its cleanup to Rn. So
 a box setting against **greedy TO Rn** is a like-for-like comparison of start
 tours, and against **greedy TO R1** it is not.
 
-## 3. Tests (`solvers/boxtest.exe`, all pass)
+## 3. Tests (`bin/boxtest2d.exe`, all pass)
 
 - **Curve cells:** every cell gets its own position (16×16 grid, 27×27 for Peano).
 - **Steps:** consecutive cells are neighbours for Hilbert, Moore, Peano and Strip
@@ -364,6 +364,22 @@ combination, not M1 on its own:
 - **The best box settings** lose about 5–7 points, close to greedy + cleanup (5.0).
   The reference loses 9.3.
 
+**Uniform vs clustered with no cleanup at all** (`box2_raw_clustered_vs_uniform.png`:
+raw greedy, each plain curve order, and each curve's boxes B with every merge at
+t = 10; 10k, % above HK):
+- **Raw greedy:** 16.4% uniform, 23.1% clustered (+6.7).
+- **M5 is the merge that holds up on clustered data:** B M5 loses only 5.4–9.5
+  points, about as little as greedy. Every other merge loses 10–29 points.
+- **M4 gives the shortest raw box tours on uniform data:** 15.9–20.2%. With
+  hilbert, moore and morton (all 15.9%) that is just under raw greedy's 16.4%.
+  But M4 loses 12–22 points on clustered data, so there it ends 29–38%.
+- **On clustered data no raw box tour beats raw greedy:** the best is hilbert
+  B M5 at 28.8% vs 23.1%.
+- **Boxes always help a curve's plain order,** except sierpinski and knopp with
+  M1, which are slightly worse on uniform data (36.8 vs 34.5, 37.8 vs 35.6).
+- **Morton's plain order** (103/113%) is the worst; its M3–M5 box tours land with
+  the others.
+
 **With vs without cleanup:**
 - **Cleanup shrinks almost every difference.** Before cleanup the settings span
   hundreds of percent; after it, a few percent.
@@ -414,9 +430,9 @@ combination, not M1 on its own:
   added in a second pass; see section 8), the two best plain curve orders
   (sierpinski, moore), and every existing solver except nn. nn is O(N²) and does
   not reach 1M.
-- **Uniform + clustered set** (`results/box2/runs.csv`): all 38 maps, i.e. 10
+- **Uniform + clustered set** (`results/2d/box2/runs.csv`): all 38 maps, i.e. 10
   maps of each type at 1k and 3 at 10k, 100k and 1M.
-- **DIMACS testbed** (`results/runs.csv`): the same settings on all 80
+- **DIMACS testbed** (`results/2d/runs.csv`): the same settings on all 80
   geometric maps up to 1M, including the 33 geometric TSPLIB maps. The 8 matrix
   maps are skipped, because the box and curve solvers need coordinates, and so
   are E3M and E10M (above 1M).
@@ -492,15 +508,15 @@ curve orders alone 38–49.
 - **The plain curve orders are the fastest** (about 2 s at 1M) but end 29–42%
   longer than greedy TO Rn. The box tour alone (hilbert B M1) is 22–33% longer.
 
-Charts: `results/scale_1M.png` (every solver at 1M), `results/scale_growth.png`
-(each cleanup solver from 1k to 1M), `results/tsplib_summary.png`; made by
+Charts: `results/2d/scale_1M.png` (every solver at 1M), `results/2d/scale_growth.png`
+(each cleanup solver from 1k to 1M), `results/2d/tsplib_summary.png`; made by
 `bench/plot_scaling.py`.
 
 ## 10. Reproduce
 
 ```powershell
 $env:PATH = "C:\msys64\ucrt64\bin;C:\msys64\usr\bin;" + $env:PATH
-cd solvers; make; .\boxtest.exe; cd ..
+cd solvers; make; cd ..; .\bin\boxtest2d.exe
 py bench\box2_plan.py A;  py bench\run.py --config bench\box2_stageA.json
 py bench\box2_plan.py B --curves sierpinski,moore,knopp --merges M5,M2
 py bench\run.py --config bench\box2_stageB.json
@@ -509,7 +525,7 @@ py bench\run.py --config bench\box2_stageC.json
 py bench\box2_report.py;  py bench\box2_charts.py
 # Stage D (1 million): reuse earlier runs, then run only what is missing
 py bench\box2_plan.py D
-py bench\import_runs.py --from results\box\runs.csv --to-config bench\box2_stageD.json --alg greedy --alg spacefill --alg twoopt --alg twoopt_or --alg greedy+2opt+oropt --alg "boxes+2opt+oropt=box:hilbert:M1:t10"
+py bench\import_runs.py --from results\2d\box\runs.csv --to-config bench\box2_stageD.json --alg greedy --alg spacefill --alg twoopt --alg twoopt_or --alg greedy+2opt+oropt --alg "boxes+2opt+oropt=box:hilbert:M1:t10"
 py bench\run.py --config bench\box2_stageD.json
 py bench\run.py --alg greedy+2opt+oropt,box:hilbert:M1:t10,box:knopp:M1:t10,box:sierpinski:M1:t10,box:sierpinski:M2:t12,box:sierpinski:M5:t4,box:hilbert:M5:t10,curve:sierpinski,curve:moore
 py bench\report.py;  py bench\plot_scaling.py
